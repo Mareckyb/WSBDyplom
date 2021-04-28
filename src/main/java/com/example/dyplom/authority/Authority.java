@@ -15,7 +15,7 @@ public class Authority {
     Long id;
     @Column(nullable = false, unique = true)
     @Enumerated
-    AuthorityName name;
+    public AuthorityName name;
 
 
     public Authority(AuthorityName name){

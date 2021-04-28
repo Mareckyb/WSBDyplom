@@ -23,7 +23,7 @@ public class PersonService {
 
     public void prepareAdminUser(){
 
-        if  (personRepository.findByLogin("admin") !=null) {
+        if  (personRepository.findByUsername("admin") !=null) {
             return;
         }
 

@@ -20,13 +20,16 @@ public class Person {
     @Id
     @GeneratedValue
     Long id;
+
     @Column(nullable=false, unique = true, length = 100)
-    String login;
+    String username;
 
     @Column(nullable = false)
     String password;
+
     @Column(unique = false , length = 100)
     String userRealName;
+
     @Column(nullable = false)
     Date dateCreated;
 
@@ -43,8 +46,8 @@ public class Person {
 
 
 
-    public Person (String login, String password, String userRealName) {
-        this.login = login;
+    public Person (String username, String password, String userRealName) {
+        this.username = username;
         this.password = password;
         this.userRealName = userRealName;
         this.dateCreated = new Date();
