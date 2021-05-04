@@ -11,24 +11,15 @@
 </head>
 
 <body>
-
 <div class="container-fluid">
-  <div class="row flex-nowrap">
-
-  <div th:replace="fragments/menu :: menu"></div>
-
-  <div class="col py-3">
     <div layout:fragment="content">
-      testowy kontent
     <!-- ============================================================================ -->
     <!-- This content is only used for static prototyping purposes (natural templates)-->
     <!-- and is therefore entirely optional, as this markup fragment will be included -->
     <!-- from "fragments/header.html" at runtime.                                     -->
     <!-- ============================================================================ -->
     </div>
-    </div>
-  </div>
-
+  <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>

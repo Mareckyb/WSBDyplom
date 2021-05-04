@@ -7,70 +7,50 @@
 <body>
 
 <div th:fragment="menu">
-  <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-      <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-        <span class="fs-5 d-none d-sm-inline">Menu</span>
-      </a>
-      <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
-        <li>
-          <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-            <i class="fs-4 bi-file-ppt"></i> <span class="ms-1 d-none d-sm-inline">Projekty</span></a>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">	<i class="fs-5 bi-bug"></i> BugTracker</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-            <li class="w-100" >
-              <a href="#" class="nav-link px-0"> <i class="bi-card-list"></i> <span class="d-none d-sm-inline">Lista projektów</span></a>
-            </li>
-            <li>
-              <a href="#" class="nav-link px-0"> <i class="bi-plus-square"></i> <span class="d-none d-sm-inline">Dodaj projekt</span></a>
-            </li>
-          </ul>
-        </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-Pr" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page" href="#">Projekty</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown-Pr">
+              <li><a class="dropdown-item" href="#">Lista Projektów</a></li>
+              <li><a class="dropdown-item" href="#">Dodaj Projekt</a></li>
+            </ul>
+          </li>
 
-        <li>
-          <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-            <i class="fs-4 bi-bookmarks"></i> <span class="ms-1 d-none d-sm-inline">Zgłoszenia</span></a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-Zg" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page" href="#">Zgłoszenia</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown-Pr">
+              <li><a class="dropdown-item" href="#">Lista Zgłoszeń</a></li>
+              <li><a class="dropdown-item" href="#">Dodaj Zgłoszenie</a></li>
+            </ul>
+          </li>
 
-          <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-            <li class="w-100" >
-              <a href="#" class="nav-link px-0"> <i class="bi-bookmarks-fill"></i> <span class="d-none d-sm-inline">Lista zgłoszeń</span></a>
-            </li>
-
-            <li>
-              <a href="#" class="nav-link px-0"> <i class="bi-bookmark-plus"></i> <span class="d-none d-sm-inline">Dodaj zgłoszenie</span></a>
-            </li>
-          </ul>
-        </li>
-
-
-        <li>
-          <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Użytkownicy</span></a>
-
-          <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-            <li class="w-100" >
-              <a href="#" class="nav-link px-0"> <i class="bi-person-lines-fill"></i> <span class="d-none d-sm-inline">Lista użytkowników</span></a>
-            </li>
-            <li>
-              <a href="#" class="nav-link px-0"> <i class="bi-person-plus-fill"></i> <span class="d-none d-sm-inline">Dodaj użytkownika</span></a>
-            </li>
-          </ul>
-        </li>
-
-      </ul>
-      <hr>
-      <div class="dropdown pb-4">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class="d-none d-sm-inline mx-1">Użytkownik</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-          <li><a class="dropdown-item" href="#">Moje konto</a></li>
-          <li><a class="dropdown-item" href="#">Wyloguj</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-Us" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page" href="#">Użytkownik</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown-Pr">
+              <li><a class="dropdown-item" href="#">Moje Konto</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Lista Użytkowników</a></li>
+              <li><a class="dropdown-item" href="#">Dodaj Użytkownika</a></li>
+            </ul>
+          </li>
         </ul>
+
+        <form class="d-flex">
+          <button class="btn btn-outline-success" type="submit">Logout</button>
+        </form>
       </div>
     </div>
-  </div>
+  </nav>
+
 </div>
 
 </body>

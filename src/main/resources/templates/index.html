@@ -6,17 +6,10 @@
 
 </head>
 <body>
-<section class="container">
-
     <div th:insert="fragments/header" :: header>  </div>
 
-</section>
-
-
-
-testowy komunikat
-
-<div th:insert="fragments/footer" :: footer>  </div>
+    <div layout:fragment="content">
+    </div>
 
 </body>
 </html>
