@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect">
-<head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 
-</head>
 <body>
-    <div th:insert="fragments/header" :: header>  </div>
 
-    <div layout:fragment="content">
-    </div>
+<div layout:fragment="main-content">
+    <p>Tu będzie treść</p>
+</div>
 
 </body>
 </html>
