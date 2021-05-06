@@ -53,8 +53,8 @@
                     </li>
                 </ul>
 
-                <form class="d-flex">
-                    <button class="btn btn-outline-success" type="submit" th:text="#{login.logOut}">Log out</button>
+                <form class="d-flex" th:action="@{/logout}" method="post">
+                    <button class="btn btn-outline-success" type="submit" th:text="#{login.logOut}" >Log out</button>
                 </form>
             </div>
         </div>
