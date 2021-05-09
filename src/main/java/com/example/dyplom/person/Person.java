@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.Entity;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
@@ -21,6 +22,7 @@ public class Person {
     @GeneratedValue
     Long id;
 
+    @NotEmpty
     @Column(nullable=false, unique = true, length = 100)
     String username;
 
@@ -30,7 +32,7 @@ public class Person {
     @Column(unique = false , length = 100)
     String userRealName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     Date dateCreated;
 
     @Column(nullable = false)

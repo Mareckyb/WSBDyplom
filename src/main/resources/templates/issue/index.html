@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<body>
+
+<div layout:fragment="main-content">
+  <section class="container">
+    <h3 th:text="#{menu.issues}" class="pb-3"></h3>
+
+    <div th:each="issue : ${issues}">
+      <span th:text="${issue.id}"></span> |
+      <span th:text="${issue.project.name}"></span> |
+      <span th:text="${issue.title}"></span> |
+      <span th:if="${issue.assignee != null}" th:text="${issue.assignee.username}"></span>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>

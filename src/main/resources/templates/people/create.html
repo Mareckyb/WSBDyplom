@@ -6,7 +6,43 @@
 <body>
 
 <div layout:fragment="main-content">
-    <p>Dodanie usera</p>
+
+    <form th:action= "@{/people/save}" th:object="${person}" method="post">
+        <div class="row">
+            <div class="mb-3">
+                <div> <label for="username"> Nazwa użytkownika </label> </div>
+                <div>
+                    <input id="username" type="text" th:field="*{username}" placeholder="Username" class="form-control"/>
+                </div>
+
+                <div> <label for="name"> Imię i nazwisko </label> </div>
+                <div>
+                    <input id="name" type="text" th:field="*{userRealName}" placeholder="name" class="form-control"/>
+                </div>
+
+                <div> <label for="password"> hasło </label> </div>
+                <div>
+                    <input id="password" type="password" th:field="*{password}" placeholder="password" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                Uprawnienia:
+
+                <p th:each="authority : ${authorities}">
+                    <input type="checkbox" name="authorities"
+                           th:value="${authority.id}"
+                           th:field="*{authorities}"/>
+
+                    <label th:text= "${authority.name}"
+                           th:for="${#ids.prev('authorities')}"></label>
+                </p>
+
+            </div>
+
+        </div>
+        <div> <button type="submit" class="btn btn-primary" th:text="Zapisz"></button></div>
+    </form>
 </div>
 
 </body>

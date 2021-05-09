@@ -5,6 +5,7 @@ import com.example.dyplom.authority.AuthorityRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class PersonService {
     void savePerson(Person person) {
         String hashedPassword = bCryptPasswordEncoder.encode(person.password);
         person.setPassword(hashedPassword);
+        person.setDateCreated(new Date());
         personRepository.save(person); }
 
     List<Person> findAllUsers() {
