@@ -29,13 +29,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Person person = personRepository.findByUsername(username);
 
-        System.out.println("Znaleziony użytkownik: " + person);
 
         if (person == null) {
             throw new UsernameNotFoundException(username);
         }
+        System.out.println("Znaleziony użytkownik: " + person);
 
-        return buildUserDetails(person);
+
+        List<GrantedAuthority> authorities = getUserAuthorities(person);
+        return new User(person.username, person.password, authorities);
     }
 
     private UserDetails buildUserDetails(Person person) {

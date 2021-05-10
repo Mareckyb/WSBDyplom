@@ -6,7 +6,43 @@
 <body>
 
 <div layout:fragment="main-content">
-    <p>Lista userów</p>
+    <section class="container">
+        <h1>
+            Użytkownicy
+        </h1>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Login
+                </th>
+                <th>
+                    Nazwa
+                </th>
+            </tr>
+            </thead>
+            <tr th:each="person : ${people}">
+                <td>
+                    <a th:href="@{'/people/edit/' + ${person.id}}"
+                       th:text="${person.id}"
+                       class="btn btn-secondary"></a>
+                </td>
+                <td th:text="${person.username}"></td>
+                <td th:text="${person.userRealName}"></td>
+            </tr>
+        </table>
+
+        <div>
+            <a th:href="@{'/people/create/'}"
+               th:text="Dodaj"
+               class="btn btn-primary"></a>
+        </div>
+    </section>
+
 </div>
 
 </body>

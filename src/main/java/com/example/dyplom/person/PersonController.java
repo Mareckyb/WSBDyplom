@@ -37,8 +37,9 @@ public class PersonController {
     @Secured("ROLE_CREATE_USER")
     ModelAndView create() {
         List<Authority> authorities = authorityRepository.findAll();
+
         ModelAndView modelAndView = new ModelAndView("people/create");
-        modelAndView.addObject("authorities", authorities);
+        modelAndView.addObject("authorities", authorityRepository.findAll());
         modelAndView.addObject("person", new Person());
         return modelAndView;
     }
@@ -69,7 +70,6 @@ public class PersonController {
             modelAndView.addObject("person", person);
             return modelAndView;
         }
-
 
         personService.savePerson(person);
         modelAndView.setViewName("redirect:/people/");

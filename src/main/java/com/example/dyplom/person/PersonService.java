@@ -38,10 +38,11 @@ public class PersonService {
         String hashedPassword = bCryptPasswordEncoder.encode(person.password);
         person.setPassword(hashedPassword);
         person.setDateCreated(new Date());
-        personRepository.save(person); }
 
-    List<Person> findAllUsers() {
-        return personRepository.findAll();
+        personRepository.save(person);
     }
+
+    List<Person> findAllUsers()
+    {  return personRepository.findAll();    }
 
 }

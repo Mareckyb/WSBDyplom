@@ -8,22 +8,61 @@
 <div layout:fragment="main-content">
 
     <form th:action= "@{/people/save}" th:object="${person}" method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
         <div class="row">
             <div class="mb-3">
                 <div> <label for="username"> Nazwa użytkownika </label> </div>
                 <div>
-                    <input id="username" type="text" th:field="*{username}" placeholder="Username" class="form-control"/>
+                    <input id="username" type="text"
+                           th:field="*{username}"
+                           placeholder="Username"
+                           th:class=" 'form-control ' +${#fields.hasErrors('username') ? 'is-invalid' : ''}"/>
+                        <small th:if="${#fields.hasErrors('username')}"
+                               th:errors="*{username}"
+                               class = "text-danger">
+                        </small>
                 </div>
 
-                <div> <label for="name"> Imię i nazwisko </label> </div>
+                <div> <label for="userRealName"> Imię i nazwisko </label> </div>
                 <div>
-                    <input id="name" type="text" th:field="*{userRealName}" placeholder="name" class="form-control"/>
+                    <input id="userRealName" type="text"
+                           th:field="*{userRealName}"
+                           placeholder="userRealName"
+                           th:class="'form-control ' +${#fields.hasErrors('userRealName') ? 'is-invalid' : ''}" />
+                    <small th:if="${#fields.hasErrors('userRealName')}"
+                           th:errors="*{userRealName}"
+                           class = "text-danger">
+                    </small>
                 </div>
+
 
                 <div> <label for="password"> hasło </label> </div>
                 <div>
-                    <input id="password" type="password" th:field="*{password}" placeholder="password" class="form-control"/>
+                    <input id="password" type="password"
+                           th:field="*{password}"
+                           placeholder="password"
+                           th:class="'form-control ' +${#fields.hasErrors('password') ? 'is-invalid' : ''}" />
+                    <small th:if="${#fields.hasErrors('password')}"
+                           th:errors="*{password}"
+                           class = "text-danger">
+                    </small>
                 </div>
+
+                <div> <label for="email"> email </label> </div>
+                <div>
+                    <input id="email" type="text"
+                           th:field="*{email}"
+                           placeholder="email"
+                           th:class="'form-control ' +${#fields.hasErrors('email') ? 'is-invalid' : ''}" />
+                    <small th:if="${#fields.hasErrors('email')}"
+                           th:errors="*{email}"
+                           class = "text-danger">
+                    </small>
+                </div>
+
+
             </div>
 
             <div class="mb-3">
@@ -34,7 +73,7 @@
                            th:value="${authority.id}"
                            th:field="*{authorities}"/>
 
-                    <label th:text= "${authority.name}"
+                    <label th:text="#{${'authority.' + authority.name}}"
                            th:for="${#ids.prev('authorities')}"></label>
                 </p>
 
@@ -42,6 +81,14 @@
 
         </div>
         <div> <button type="submit" class="btn btn-primary" th:text="Zapisz"></button></div>
+
+        <a th:href="@{'/people/edit/' + ${person.id}}"
+           th:if="${person.id}"
+           class="btn btn-secondary">
+            Usuń
+        </a>
+
+
     </form>
 </div>
 

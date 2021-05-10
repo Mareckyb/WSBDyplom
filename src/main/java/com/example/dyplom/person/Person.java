@@ -10,12 +10,14 @@ import javax.persistence.Entity;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
+@UniqueUsername
 
 public class Person {
     @Id
@@ -24,11 +26,15 @@ public class Person {
 
     @NotEmpty
     @Column(nullable=false, unique = true, length = 100)
+    @Size(min=2, max=100)
     String username;
 
+    @NotEmpty
     @Column(nullable = false)
     String password;
 
+    @NotEmpty
+    @Size(min=3, max=100)
     @Column(unique = false , length = 100)
     String userRealName;
 
@@ -39,8 +45,11 @@ public class Person {
     @ColumnDefault(value = "true")
     Boolean enabled = true;
 
+    @Column(nullable=true)
+    String email;
 
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable (name = "person_authorities",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn (name = "authority_id"))

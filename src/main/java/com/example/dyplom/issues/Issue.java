@@ -24,7 +24,7 @@ public class Issue {
     String title;
 
     @Column(nullable = false)
-            @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     State state = State.TODO;
 
     @ManyToOne
@@ -32,7 +32,7 @@ public class Issue {
     Person assignee;
 
     @ManyToOne(optional = false)
-            @JoinColumn(name="project_id", nullable = false)
+    @JoinColumn(name="project_id", nullable = false)
     Project project;
 
 
