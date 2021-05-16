@@ -68,5 +68,12 @@ public class Person {
         this.dateCreated = new Date();
     }
 
+    public Person (String username, String password, String userRealName, String email) {
+        this.username = username;
+        this.password = password;
+        this.userRealName = userRealName;
+        this.email = email;
+        this.dateCreated = new Date();
+    }
 
 }

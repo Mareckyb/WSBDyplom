@@ -40,9 +40,10 @@
 
                 <div> <label for="password"> hasło </label> </div>
                 <div>
-                    <input id="password" type="password"
+                    <input id="password"
+                           type="password"
                            th:field="*{password}"
-                           placeholder="password"
+                           placeholder="hasło"
                            th:class="'form-control ' +${#fields.hasErrors('password') ? 'is-invalid' : ''}" />
                     <small th:if="${#fields.hasErrors('password')}"
                            th:errors="*{password}"
@@ -52,7 +53,8 @@
 
                 <div> <label for="repeatedPassword"> powtórzone hasło </label> </div>
                 <div>
-                    <input id="repeatedPassword" type="password"
+                    <input id="repeatedPassword"
+                           type="password"
                            th:field="*{repeatedPassword}"
                            placeholder="hasło powtorzone"
                            th:class="'form-control ' +${#fields.hasErrors('repeatedPassword') ? 'is-invalid' : ''}" />
@@ -93,14 +95,15 @@
             </div>
 
         </div>
-        <div> <button type="submit" class="btn btn-primary" th:text="Zapisz"></button></div>
+        <div>
+        <button type="submit" class="btn btn-primary" th:text="Zapisz"></button>
 
         <a th:href="@{'/people/edit/' + ${person.id}}"
            th:if="${person.id}"
            class="btn btn-secondary">
             Usuń
         </a>
-
+        </div>
 
     </form>
 </div>
