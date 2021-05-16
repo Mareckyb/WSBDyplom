@@ -7,32 +7,39 @@
 
 <div layout:fragment="main-content">
     <section class="container">
-        <h1>
-            Użytkownicy
-        </h1>
+
+        <i class="fs-4 fst-normal bi-people"  th:text="#{list.users.title}"></i>
 
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>
+                <th th:text="#{list.users.id}">
                     Id
                 </th>
-                <th>
+                <th th:text="#{list.users.username}">
                     Login
                 </th>
-                <th>
+                <th th:text="#{list.users.realusername}">
                     Nazwa
+                </th>
+                <th th:text="#{list.users.active}">
+                    Czy aktywny
+                </th>
+                <th th:text="#{list.users.actions}">
+                    Akcje
                 </th>
             </tr>
             </thead>
             <tr th:each="person : ${people}">
+                <td th:text="${person.id}">ID</td>
+                <td th:text="${person.username}">username</td>
+                <td th:text="${person.userRealName}">realusername</td>
+                <td th:text="${person.enabled}? #{list.users.active} : #{list.users.deleted}">enabled disabled</td>
                 <td>
                     <a th:href="@{'/people/edit/' + ${person.id}}"
-                       th:text="${person.id}"
+                       th:text="#{list.users.edit}"
                        class="btn btn-secondary"></a>
                 </td>
-                <td th:text="${person.username}"></td>
-                <td th:text="${person.userRealName}"></td>
             </tr>
         </table>
 
