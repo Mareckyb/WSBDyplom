@@ -11,6 +11,10 @@
 
         <input type="hidden" th:field="*{id}"/>
 
+        <div th:if="${param.error}" class="alert alert-danger">
+            <span th:text="#{form.user.error}"></span>
+        </div>
+
         <div class="row">
             <div class="mb-3">
                 <div> <label for="username"> Nazwa użytkownika </label> </div>
@@ -98,14 +102,24 @@
         <div>
         <button type="submit" class="btn btn-primary" th:text="Zapisz"></button>
 
-        <a th:href="@{'/people/edit/' + ${person.id}}"
-           th:if="${person.id}"
-           class="btn btn-secondary">
+        <a th:href="@{'/people/delete/' + ${person.id}}"
+           th:if="${person.id} and ${person.enabled} and ${person.username}!='admin'"
+           class="btn btn-danger" th:text="#{form.user.delete}">
             Usuń
         </a>
-        </div>
 
+            <a th:href="@{'/people/delete/' + ${person.id}}"
+               th:if="${person.id} and ${person.enabled==false} and ${person.username}!='admin'"
+               class="btn btn-danger" th:text="#{form.user.undelete}">
+                Przywróć
+            </a>
+
+
+        </div>
     </form>
+
+
+
 </div>
 
 </body>

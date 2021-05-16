@@ -76,4 +76,25 @@ public class PersonController {
 
         return modelAndView;
     }
+
+    @GetMapping("delete/{id}")
+    @Secured ("ROLE_DELETE_USER")
+    ModelAndView deleteUser (@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        Person person = personRepository.findById(id).orElse(null);
+        if (person == null) {
+            return index();
+        }
+        if (person.getEnabled().equals(true)) {
+        person.setEnabled(false);
+        }
+        else person.setEnabled(true);
+
+        personRepository.save(person);
+        modelAndView.setViewName("redirect:/people/");
+
+        return modelAndView;
+    }
+
+
 }
