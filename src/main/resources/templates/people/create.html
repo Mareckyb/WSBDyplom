@@ -50,6 +50,19 @@
                     </small>
                 </div>
 
+                <div> <label for="repeatedPassword"> powtórzone hasło </label> </div>
+                <div>
+                    <input id="repeatedPassword" type="password"
+                           th:field="*{repeatedPassword}"
+                           placeholder="hasło powtorzone"
+                           th:class="'form-control ' +${#fields.hasErrors('repeatedPassword') ? 'is-invalid' : ''}" />
+                    <small th:if="${#fields.hasErrors('repeatedPassword')}"
+                           th:errors="*{repeatedPassword}"
+                           class = "text-danger">
+                    </small>
+                </div>
+
+
                 <div> <label for="email"> email </label> </div>
                 <div>
                     <input id="email" type="text"

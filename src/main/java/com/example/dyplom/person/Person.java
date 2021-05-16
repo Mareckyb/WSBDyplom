@@ -18,6 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @UniqueUsername
+@ValidPasswords
 
 public class Person {
     @Id
@@ -32,6 +33,9 @@ public class Person {
     @NotEmpty
     @Column(nullable = false)
     String password;
+
+    @Transient
+    String repeatedPassword;
 
     @NotEmpty
     @Size(min=3, max=100)
