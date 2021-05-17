@@ -22,6 +22,9 @@
                 <th th:text="#{list.users.realusername}">
                     Nazwa
                 </th>
+                <th th:text="#{list.users.email}">
+                    email
+                </th>
                 <th th:text="#{list.users.active}">
                     Czy aktywny
                 </th>
@@ -34,11 +37,24 @@
                 <td th:text="${person.id}">ID</td>
                 <td th:text="${person.username}">username</td>
                 <td th:text="${person.userRealName}">realusername</td>
+                <td th:text="${person.email}">email</td>
                 <td th:text="${person.enabled}? #{list.users.active} : #{list.users.deleted}">enabled disabled</td>
                 <td>
                     <a th:href="@{'/people/edit/' + ${person.id}}"
                        th:text="#{list.users.edit}"
                        class="btn btn-secondary"></a>
+
+                    <a th:href="@{'/people/delete/' + ${person.id}}"
+                       th:if="${person.id} and ${person.enabled} and ${person.username}!='admin'"
+                       class="btn btn-danger" th:text="#{form.user.delete}">
+                        Usuń
+                    </a>
+
+                    <a th:href="@{'/people/delete/' + ${person.id}}"
+                       th:if="${person.id} and ${person.enabled==false} and ${person.username}!='admin'"
+                       class="btn btn-danger" th:text="#{form.user.undelete}">
+                        Przywróć
+                    </a>
                 </td>
             </tr>
         </table>

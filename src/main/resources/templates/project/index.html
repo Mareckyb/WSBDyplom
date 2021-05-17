@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<body>
+
+<div layout:fragment="main-content">
+  <section class="container">
+
+    <i class="fs-4 fst-normal bi-file-ppt"  th:text="#{menu.projects}"></i>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th th:text="#{list.projects.id}">
+          Id
+        </th>
+        <th th:text="#{list.projects.name}">
+          nazwa projektu
+        </th>
+        <th th:text="#{list.projects.description}">
+          opis projektu
+        </th>
+        <th th:text="#{list.projects.action}">
+          akcje
+        </th>
+
+
+      </tr>
+      </thead>
+
+      <tr th:each="project : ${projects}">
+        <td th:text="${project.id}">ID</td>
+        <td th:text="${project.name}">nazwa projektu</td>
+        <td th:text="${project.description}">tytuł zadania</td>
+        <td>
+          <a th:href="@{'/'}"
+             th:text="Edytuj"
+             class="btn btn-secondary"></a>
+        </td>
+
+
+      </tr>
+
+    </table>
+
+    <div>
+      <a th:href="@{'/'}"
+         th:text="Dodaj"
+         class="btn btn-primary"></a>
+    </div>
+
+  </section>
+</div>
+
+</body>
+</html>

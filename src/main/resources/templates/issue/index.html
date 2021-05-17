@@ -8,14 +8,57 @@
 <div layout:fragment="main-content">
   <section class="container">
 
-    <i th:text="#{menu.issues}" class="fs-4 fst-normal bi-stickies"></i>
+    <i class="fs-4 fst-normal bi-stickies"  th:text="#{menu.issues}"></i>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th th:text="#{list.issues.id}">
+          Id
+        </th>
+        <th th:text="#{list.issues.projectname}">
+          nazwa projektu
+        </th>
+        <th th:text="#{list.issues.title}">
+          tytuł zadania
+        </th>
+        <th th:text="#{list.issues.username}">
+          Przydzielony użytkownik
+        </th>
+        <th th:text="#{list.issues.status}">
+          Status
+        </th>
+        <th th:text="#{list.issues.action}">
+         Akcje
+        </th>
 
-    <div th:each="issue : ${issues}">
-      <span th:text="${issue.id}"></span> |
-      <span th:text="${issue.project.name}"></span> |
-      <span th:text="${issue.title}"></span> |
-      <span th:if="${issue.assignee != null}" th:text="${issue.assignee.username}"></span>
+
+
+      </tr>
+      </thead>
+
+    <tr th:each="issue : ${issues}">
+      <td th:text="${issue.id}">ID</td>
+      <td th:text="${issue.project.name}">nazwa projektu</td>
+      <td th:text="${issue.title}">tytuł zadania</td>
+      <td th:if="${issue.assignee != null}" th:text="${issue.assignee.username}"> nazwa usera </td>
+      <td th:text="${issue.state}">Status</td>
+      <td>
+        <a th:href="@{'/'}"
+           th:text="Edytuj"
+           class="btn btn-secondary"></a>
+
+      </td>
+
+    </tr>
+
+    </table>
+
+    <div>
+      <a th:href="@{'/'}"
+         th:text="Dodaj"
+         class="btn btn-primary"></a>
     </div>
+
   </section>
 </div>
 

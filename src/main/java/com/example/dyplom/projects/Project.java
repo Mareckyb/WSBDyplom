@@ -22,5 +22,8 @@ import javax.persistence.Id;
         @Column(nullable = false, unique=true)
         String name;
 
+        @Column(nullable=true, length = 500)
+        String description;
+
     }
 
