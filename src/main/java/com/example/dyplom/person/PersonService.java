@@ -34,10 +34,11 @@ public class PersonService {
         savePerson(person);
     }
 
+
     void savePerson(Person person) {
         String hashedPassword = bCryptPasswordEncoder.encode(person.password);
         person.setPassword(hashedPassword);
-        person.setDateCreated(new Date());
+        if (person.dateCreated== null) person.setDateCreated(new Date());
 
         personRepository.save(person);
     }

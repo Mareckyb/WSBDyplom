@@ -24,28 +24,23 @@
         <th th:text="#{list.projects.action}">
           akcje
         </th>
-
-
       </tr>
       </thead>
 
       <tr th:each="project : ${projects}">
         <td th:text="${project.id}">ID</td>
-        <td th:text="${project.name}">nazwa projektu</td>
+        <td th:text="${project.projectname}">nazwa projektu</td>
         <td th:text="${project.description}">tytuł zadania</td>
         <td>
           <a th:href="@{'/'}"
              th:text="Edytuj"
              class="btn btn-secondary"></a>
         </td>
-
-
       </tr>
-
     </table>
 
     <div>
-      <a th:href="@{'/'}"
+      <a th:href="@{'/project/create'}"
          th:text="Dodaj"
          class="btn btn-primary"></a>
     </div>

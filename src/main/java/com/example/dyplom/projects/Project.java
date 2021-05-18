@@ -8,19 +8,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
-    @Entity
+@Entity
     @Getter
     @Setter
     @NoArgsConstructor
+    @UniqueProjectName
     public class Project {
 
         @Id
         @GeneratedValue
         Long id;
 
+
+        @NotEmpty
         @Column(nullable = false, unique=true)
-        String name;
+        String projectname;
 
         @Column(nullable=true, length = 500)
         String description;

@@ -30,15 +30,12 @@
         <th th:text="#{list.issues.action}">
          Akcje
         </th>
-
-
-
       </tr>
       </thead>
 
     <tr th:each="issue : ${issues}">
       <td th:text="${issue.id}">ID</td>
-      <td th:text="${issue.project.name}">nazwa projektu</td>
+      <td th:text="${issue.project.projectname}">nazwa projektu</td>
       <td th:text="${issue.title}">tytuł zadania</td>
       <td th:if="${issue.assignee != null}" th:text="${issue.assignee.username}"> nazwa usera </td>
       <td th:text="${issue.state}">Status</td>
@@ -46,11 +43,8 @@
         <a th:href="@{'/'}"
            th:text="Edytuj"
            class="btn btn-secondary"></a>
-
       </td>
-
     </tr>
-
     </table>
 
     <div>
