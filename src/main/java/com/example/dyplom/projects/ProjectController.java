@@ -6,10 +6,7 @@ import com.example.dyplom.person.Person;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -31,11 +28,21 @@ public class ProjectController {
     }
 
 
-
     @GetMapping("/create")
     ModelAndView create() {
         ModelAndView modelAndView = new ModelAndView("project/create");
         modelAndView.addObject("project", new Project());
+        return modelAndView;
+    }
+
+    @GetMapping("/edit/{id}")
+    ModelAndView edit(@PathVariable Long id) {
+        Project project = projectRepository.findById(id).orElse(null);
+        if (project == null) {
+            return index();
+        }
+        ModelAndView modelAndView = new ModelAndView("project/create");
+        modelAndView.addObject("project", project);
         return modelAndView;
     }
 

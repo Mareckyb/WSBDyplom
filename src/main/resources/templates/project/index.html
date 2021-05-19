@@ -32,7 +32,7 @@
         <td th:text="${project.projectname}">nazwa projektu</td>
         <td th:text="${project.description}">tytuł zadania</td>
         <td>
-          <a th:href="@{'/'}"
+          <a th:href="@{'/project/edit/' + ${project.id}}"
              th:text="Edytuj"
              class="btn btn-secondary"></a>
         </td>

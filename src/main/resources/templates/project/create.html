@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout_nl}">
+      layout:decorate="~{layout}">
 
 <body>
 
 <div layout:fragment="main-content">
+
+    <div class="container">
     <form th:action= "@{/project/save}" th:object="${project}" method="post">
 
         <div class="row">
-            <div class="mb-3">
+            <div>
+                <div class="col-md-6">
                 <div> <label for="projectname" th:text="#{form.project.name}"> Nazwa </label> </div>
                 <div>
                     <input id="projectname" type="text"
@@ -21,28 +24,34 @@
                            class = "text-danger">
                     </small>
                 </div>
+                </div>
 
+                <div class="col-md-6">
                 <div> <label for="description" th:text="#{form.project.description}"> Opis projektu </label> </div>
                 <div>
-                    <input id="description" type="text" maxlength="500"
+                    <textarea id="description" rows="3" maxlength="500"
                            th:field="*{description}"
                            placeholder="Opis projektu"
-                           th:class=" 'form-control ' +${#fields.hasErrors('description') ? 'is-invalid' : ''}"/>
+                              th:class=" 'form-control ' +${#fields.hasErrors('description') ? 'is-invalid' : ''}"></textarea>
                     <small th:if="${#fields.hasErrors('description')}"
                            th:errors="*{description}"
                            class = "text-danger">
                     </small>
                 </div>
 
-                <button type="submit" class="btn btn-primary" th:text="Zapisz"></button>
-
-
+                </div>
+<br>
+                <div class="d-grid gap-2 d-md-block">
+                    <button type="submit" class="btn btn-primary " th:text="#{form.user.save}">Zapisz</button>
+                    <a th:href="@{/project/}"
+                        class="btn btn-info" th:text="#{form.user.cancel}">
+                        Anuluj
+                    </a>
+                </div>
             </div>
         </div>
-
-
     </form>
-
+</div>
 </div>
 
 </body>
