@@ -1,6 +1,5 @@
 package com.example.dyplom.projects;
 
-import com.example.dyplom.person.UsernameUniquenessValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -13,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = ProjectNameUniquenessValidator.class)
 public @interface UniqueProjectName {
-    String message() default "{name.unique.error}";
+    String message() default "{projectname.unique.error}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

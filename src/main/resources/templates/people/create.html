@@ -11,6 +11,7 @@
 
         <input type="hidden" th:field="*{id}"/>
 
+
         <div th:if="${param.error}" class="alert alert-danger">
             <span th:text="#{form.user.error}"></span>
         </div>

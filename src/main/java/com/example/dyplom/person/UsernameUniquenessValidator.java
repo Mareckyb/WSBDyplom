@@ -18,7 +18,7 @@ public class UsernameUniquenessValidator  implements ConstraintValidator<UniqueU
 
     @Override
     public boolean isValid(Person person, ConstraintValidatorContext ctx) {
-        //Logika walidacji polna username
+        //Logika walidacji pola username
 
         Person foundPerson = personRepository.findByUsername(person.getUsername());
 

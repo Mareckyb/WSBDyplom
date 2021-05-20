@@ -19,9 +19,8 @@ public class ValidPasswordsValidator implements ConstraintValidator<ValidPasswor
                         .addPropertyNode("password")
                         .addConstraintViolation();
                 return false;
-            } else {
-                return true;
             }
+            return true;
         }
 
         boolean passwordsAreValid = person.getPassword().equals(person.getRepeatedPassword());
