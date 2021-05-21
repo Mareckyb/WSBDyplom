@@ -27,6 +27,10 @@
         <th th:text="#{list.issues.status}">
           Status
         </th>
+        <th th:text="#{list.issues.typeOfIssue}">
+          Status
+        </th>
+
         <th th:text="#{list.issues.action}">
          Akcje
         </th>
@@ -39,6 +43,7 @@
       <td th:text="${issue.title}">tytuł zadania</td>
       <td th:if="${issue.assignee != null}" th:text="${issue.assignee.username}"> nazwa usera </td>
       <td th:text="${issue.state}">Status</td>
+      <td th:text="${issue.typeOfIssue}">Typ zadania</td>
       <td>
         <a th:href="@{'/'}"
            th:text="Edytuj"

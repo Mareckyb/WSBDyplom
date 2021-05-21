@@ -1,6 +1,7 @@
 package com.example.dyplom.issues;
 
 import com.example.dyplom.enums.State;
+import com.example.dyplom.enums.TypeOfIssue;
 import com.example.dyplom.person.Person;
 import com.example.dyplom.projects.Project;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -27,6 +29,14 @@ public class Issue {
     @Enumerated(EnumType.STRING)
     State state = State.TODO;
 
+    @Column(nullable=false)
+    @Enumerated(EnumType.STRING)
+    TypeOfIssue typeOfIssue = TypeOfIssue.TASK;
+
+    @Column(nullable = false)
+    @Size(max=500)
+    String description;
+
     @ManyToOne
     @JoinColumn(name="assignee_id")
     Person assignee;
@@ -34,6 +44,8 @@ public class Issue {
     @ManyToOne(optional = false)
     @JoinColumn(name="project_id", nullable = false)
     Project project;
+
+
 
 
 }
