@@ -1,5 +1,6 @@
 package com.example.dyplom.projects;
 
+import com.example.dyplom.person.Person;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -57,6 +58,21 @@ public class ProjectController {
         }
 
         projectRepository.save(project);
+        modelAndView.setViewName("redirect:/project/");
+
+        return modelAndView;
+    }
+
+
+    @GetMapping("delete/{id}")
+    @Secured ("ROLE_MANAGE_PROJECT")
+    ModelAndView deleteProject (@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        Project project = projectRepository.findById(id).orElse(null);
+        if (project == null) {
+            return index();
+        }
+        projectRepository.delete(project);
         modelAndView.setViewName("redirect:/project/");
 
         return modelAndView;

@@ -31,10 +31,12 @@ public class Person {
     String username;
 
     @NotEmpty
-    @Column(nullable = false)
+    //@Column(nullable = false)
+    @Size(min=3)
     String password;
 
     @Transient
+    @Size(min=3)
     String repeatedPassword;
 
     @NotEmpty

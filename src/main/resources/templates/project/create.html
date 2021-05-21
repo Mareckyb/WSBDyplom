@@ -45,6 +45,11 @@
 <br>
                 <div class="d-grid gap-2 d-md-block">
                     <button type="submit" class="btn btn-primary " th:text="#{form.user.save}">Zapisz</button>
+                    <a th:href="@{'/project/delete/' + ${project.id}}"
+                       th:if="${project.id}"
+                       class="btn btn-danger" th:text="#{form.user.delete}">
+                        Usuń
+                    </a>
                     <a th:href="@{/project/}"
                         class="btn btn-info" th:text="#{form.user.cancel}">
                         Anuluj
