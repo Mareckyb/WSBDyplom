@@ -45,7 +45,7 @@
       <td th:text="${issue.state}">Status</td>
       <td th:text="${issue.typeOfIssue}">Typ zadania</td>
       <td>
-        <a th:href="@{'/'}"
+        <a th:href="@{'/issue/edit/' + ${issue.id}}"
            th:text="Edytuj"
            class="btn btn-secondary"></a>
       </td>
@@ -53,7 +53,7 @@
     </table>
 
     <div>
-      <a th:href="@{'/'}"
+      <a th:href="@{'/issue/create/'}"
          th:text="Dodaj"
          class="btn btn-primary"></a>
     </div>

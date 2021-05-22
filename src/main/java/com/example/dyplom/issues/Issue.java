@@ -1,6 +1,6 @@
 package com.example.dyplom.issues;
 
-import com.example.dyplom.enums.State;
+import com.example.dyplom.enums.StateName;
 import com.example.dyplom.enums.TypeOfIssue;
 import com.example.dyplom.person.Person;
 import com.example.dyplom.projects.Project;
@@ -27,7 +27,7 @@ public class Issue {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    State state = State.TODO;
+    StateName state = StateName.TODO;
 
     @Column(nullable=false)
     @Enumerated(EnumType.STRING)

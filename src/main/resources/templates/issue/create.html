@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<body>
+
+<div layout:fragment="main-content">
+
+    <div class="container">
+        <form th:action= "@{/issue/save}" th:object="${issue}" method="post">
+
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="row">
+                <div>
+                    <div class="col-md-6">
+                        <div> <label for="title" th:text="#{form.issue.name}"> Nazwa </label> </div>
+                        <div>
+                            <input id="title" type="text"
+                                   th:field="*{title}"
+                                   placeholder="Tytuł zgłoszenia"
+                                   th:class=" 'form-control ' +${#fields.hasErrors('title') ? 'is-invalid' : ''}"/>
+                            <small th:if="${#fields.hasErrors('title')}"
+                                   th:errors="*{title}"
+                                   class = "text-danger">
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div> <label for="description" th:text="#{form.issue.description}"> Opis projektu </label> </div>
+                        <div>
+                    <textarea id="description" rows="3" maxlength="500"
+                              th:field="*{description}"
+                              placeholder="Opis projektu"
+                              th:class=" 'form-control ' +${#fields.hasErrors('description') ? 'is-invalid' : ''}"></textarea>
+                            <small th:if="${#fields.hasErrors('description')}"
+                                   th:errors="*{description}"
+                                   class = "text-danger">
+                            </small>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="d-grid gap-2 d-md-block">
+                        <button type="submit" class="btn btn-primary " th:text="#{form.user.save}">Zapisz</button>
+                        <a th:href="@{'/issue/delete/' + ${issue.id}}"
+                           th:if="${issue.id}"
+                           class="btn btn-danger" th:text="#{form.user.delete}">
+                            Usuń
+                        </a>
+                        <a th:href="@{/issue/}"
+                           class="btn btn-info" th:text="#{form.user.cancel}">
+                            Anuluj
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

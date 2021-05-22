@@ -1,5 +1,5 @@
 package com.example.dyplom.enums;
 
-public enum State {
+public enum StateName {
     TODO, IN_PROGRESS, FIXED, CLOSED;
 }
