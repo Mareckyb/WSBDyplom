@@ -48,6 +48,11 @@
         <a th:href="@{'/issue/edit/' + ${issue.id}}"
            th:text="Edytuj"
            class="btn btn-secondary"></a>
+        <a th:href="@{'/issue/delete/' + ${issue.id}}"
+           th:if="${issue.id}"
+           class="btn btn-danger" th:text="#{form.user.delete}">
+          Usuń
+        </a>
       </td>
     </tr>
     </table>

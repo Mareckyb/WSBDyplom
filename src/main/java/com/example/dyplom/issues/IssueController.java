@@ -3,6 +3,7 @@ package com.example.dyplom.issues;
 import com.example.dyplom.enums.StateRepository;
 import com.example.dyplom.enums.TypeOfIssueRepository;
 import com.example.dyplom.person.PersonRepository;
+import com.example.dyplom.projects.Project;
 import com.example.dyplom.projects.ProjectRepository;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/issue")
@@ -82,6 +84,19 @@ public class IssueController {
             return modelAndView;
         }
         issueRepository.save(issue);
+        modelAndView.setViewName("redirect:/issue/");
+        return modelAndView;
+    }
+
+    @GetMapping("delete/{id}")
+    @Secured ("ROLE_MANAGE_ISSUE")
+    ModelAndView deleteIssue (@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        Issue issue = issueRepository.findById(id).orElse(null);
+        if (issue == null) {
+            return index();
+        }
+        issueRepository.delete(issue);
         modelAndView.setViewName("redirect:/issue/");
         return modelAndView;
     }
