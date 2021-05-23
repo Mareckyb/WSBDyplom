@@ -3,6 +3,7 @@ package com.example.dyplom.issues;
 import com.example.dyplom.enums.StateRepository;
 import com.example.dyplom.enums.TypeOfIssueRepository;
 import com.example.dyplom.person.PersonRepository;
+import com.example.dyplom.projects.ProjectRepository;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,13 +20,15 @@ public class IssueController {
     final PersonRepository personRepository;
     final StateRepository stateRepository;
     final TypeOfIssueRepository typeOfIssueRepository;
+    final ProjectRepository projectRepository;
 
 
-    public IssueController(IssueRepository issueRepository, PersonRepository personRepository, StateRepository stateRepository, TypeOfIssueRepository typeOfIssueRepository) {
+    public IssueController(IssueRepository issueRepository, PersonRepository personRepository, StateRepository stateRepository, TypeOfIssueRepository typeOfIssueRepository, ProjectRepository projectRepository) {
         this.issueRepository = issueRepository;
         this.personRepository = personRepository;
         this.stateRepository = stateRepository;
         this.typeOfIssueRepository = typeOfIssueRepository;
+        this.projectRepository = projectRepository;
     }
 
     @GetMapping
@@ -41,7 +44,8 @@ public class IssueController {
         ModelAndView modelAndView = new ModelAndView("issue/create");
         modelAndView.addObject("state", stateRepository.findAll());
         modelAndView.addObject("type", typeOfIssueRepository.findAll());
-        modelAndView.addObject("person", personRepository.findAll());
+        modelAndView.addObject("persons", personRepository.findAll());
+        modelAndView.addObject("projects", projectRepository.findAll());
         modelAndView.addObject("issue", new Issue());
         return modelAndView;
     }
@@ -56,7 +60,8 @@ public class IssueController {
         ModelAndView modelAndView = new ModelAndView("issue/create");
         modelAndView.addObject("state", stateRepository.findAll());
         modelAndView.addObject("type", typeOfIssueRepository.findAll());
-        modelAndView.addObject("person", personRepository.findAll());
+        modelAndView.addObject("persons", personRepository.findAll());
+        modelAndView.addObject("projects", projectRepository.findAll());
         modelAndView.addObject("issue", issue);
         return modelAndView;
     }
@@ -71,7 +76,8 @@ public class IssueController {
             modelAndView.setViewName("issue/create");
             modelAndView.addObject("state", stateRepository.findAll());
             modelAndView.addObject("type", typeOfIssueRepository.findAll());
-            modelAndView.addObject("person", personRepository.findAll());
+            modelAndView.addObject("persons", personRepository.findAll());
+            modelAndView.addObject("projects", projectRepository.findAll());
             modelAndView.addObject("issue", issue);
             return modelAndView;
         }
