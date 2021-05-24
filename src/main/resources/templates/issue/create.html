@@ -8,13 +8,20 @@
 <div layout:fragment="main-content">
 
     <div class="container">
+
+        <H1 th:if="${id}" th:text="#{form.issue.old}" ></H1>
+        <H1 th:unless="${id}" th:text="#{form.issue.new}" ></H1>
+
+        <br>
         <form th:action= "@{/issue/save}" th:object="${issue}" method="post">
 
             <input type="hidden" th:field="*{id}"/>
 
-            <div class="row">
-                <div>
-                    <div class="col-md-6">
+            <div class="container border">
+                <div class="row">
+                    <div class="col">
+                        <br>
+                        <div class="form-group col-md-auto mb-3">
                         <div> <label for="title" th:text="#{form.issue.name}"> Nazwa </label> </div>
                         <div>
                             <input id="title" type="text"
@@ -26,9 +33,10 @@
                                    class = "text-danger">
                             </small>
                         </div>
-                    </div>
+                        </div>
 
-                    <div class="col-md-6">
+
+                    <div class="form-group col-md-auto mb-3">
                         <div> <label for="description" th:text="#{form.issue.description}"> Opis projektu </label> </div>
                         <div>
                     <textarea id="description" rows="10" maxlength="500"
@@ -41,37 +49,51 @@
                             </small>
                         </div>
                     </div>
+                    </div>
 
-
+                    <div class="col">
+                        <br>
+                   <fieldset>
+                    <div class="form-group col-md-6 mb-3">
                     <div> <label for="state" th:text="#{form.issue.state}"> Nazwa </label> </div>
                     <select class="form-select" name="state" id="state" th:field="*{state}">
                         <option th:each="state : ${T(com.example.dyplom.enums.StateName).values()}"
                                 th:value="${state}"  th:text="#{${'stateName.'+state}}"></option>
                     </select>
+                    </div>
 
-
+                    <div class="form-group col-md-6 mb-3">
                     <div> <label for="typeOfIssue" th:text="#{form.issue.type}"> Typ zdarzenia </label> </div>
                     <select class="form-select" name="type" id="typeOfIssue" th:field="*{typeOfIssue}">
                         <option th:each="typeOfIssue : ${T(com.example.dyplom.enums.TypeOfIssue).values()}"
                                 th:value="${typeOfIssue}"  th:text="#{${'typeOfIssue.'+typeOfIssue}}"></option>
                     </select>
+                    </div>
 
 
+                    <div class="form-group col-md-6 mb-3">
                     <div> <label for="assignee" th:text="#{form.issue.assignee}"> podpięty user </label> </div>
                     <select th:class="form-select" name="assignee" id="assignee" th:field="*{assignee}">
                         <option th:each="person : ${persons}"
                                 th:value="${person.id}" th:text="${person.username}"></option>
                     </select>
+                    </div>
 
+                    <div class="form-group col-md-6 mb-3">
                     <div> <label for="project" th:text="#{form.issue.project}"> podpięty projekt </label> </div>
                     <select th:class="form-select" name="project" id="project" th:field="*{project}">
                         <option th:each="project : ${projects}"
                                 th:value="${project.id}" th:text="${project.projectname}"></option>
                     </select>
-
+                    </div>
+                   </fieldset>
+                    </div>
 
                     <br>
-                    <div class="d-grid gap-2 d-md-block">
+
+
+                    <div class="gap-2">
+                        <br>
                         <button type="submit" class="btn btn-primary " th:text="#{form.user.save}">Zapisz</button>
                         <a th:href="@{'/issue/delete/' + ${issue.id}}"
                            th:if="${issue.id}"
@@ -82,8 +104,12 @@
                            class="btn btn-info" th:text="#{form.user.cancel}">
                             Anuluj
                         </a>
+                        <br>
                     </div>
+
+
                 </div>
+                <br>
             </div>
         </form>
     </div>

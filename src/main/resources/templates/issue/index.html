@@ -10,7 +10,7 @@
 
     <i class="fs-4 fst-normal bi-stickies"  th:text="#{menu.issues}"></i>
     <table class="table table-striped">
-      <thead>
+      <thead class="black white-text">
       <tr>
         <th th:text="#{list.issues.id}">
           Id
@@ -47,10 +47,10 @@
       <td>
         <a th:href="@{'/issue/edit/' + ${issue.id}}"
            th:text="Edytuj"
-           class="btn btn-secondary"></a>
+           class="btn btn-secondary btn-sm m-0 py-1 px-2"></a>
         <a th:href="@{'/issue/delete/' + ${issue.id}}"
            th:if="${issue.id}"
-           class="btn btn-danger" th:text="#{form.user.delete}">
+           class="btn btn-danger btn-sm m-0 py-1 px-2" th:text="#{form.user.delete}">
           Usuń
         </a>
       </td>

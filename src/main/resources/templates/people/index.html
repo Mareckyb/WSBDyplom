@@ -11,7 +11,7 @@
         <i class="fs-4 fst-normal bi-people"  th:text="#{list.users.title}"></i>
 
         <table class="table table-striped">
-            <thead>
+            <thead class="black white-text">
             <tr>
                 <th th:text="#{list.users.id}">
                     Id
@@ -42,17 +42,17 @@
                 <td>
                     <a th:href="@{'/people/edit/' + ${person.id}}"
                        th:text="#{list.users.edit}"
-                       class="btn btn-secondary"></a>
+                       class="btn btn-secondary btn-sm m-0 py-1 px-2"></a>
 
                     <a th:href="@{'/people/delete/' + ${person.id}}"
                        th:if="${person.id} and ${person.enabled} and ${person.username}!='admin'"
-                       class="btn btn-danger" th:text="#{form.user.delete}">
+                       class="btn btn-danger btn-sm m-0 py-1 px-2" th:text="#{form.user.delete}">
                         Usuń
                     </a>
 
                     <a th:href="@{'/people/delete/' + ${person.id}}"
                        th:if="${person.id} and ${person.enabled==false} and ${person.username}!='admin'"
-                       class="btn btn-danger" th:text="#{form.user.undelete}">
+                       class="btn btn-danger btn-sm m-0 py-1 px-2" th:text="#{form.user.undelete}">
                         Przywróć
                     </a>
                 </td>

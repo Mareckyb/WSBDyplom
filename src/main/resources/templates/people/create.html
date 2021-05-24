@@ -7,6 +7,10 @@
 
 <div layout:fragment="main-content">
     <div class="container">
+        <H1 th:if="${id}" th:text="#{form.user.old}" ></H1>
+        <H1 th:unless="${id}" th:text="#{form.user.new}" ></H1>
+
+
     <form th:action= "@{/people/save}" th:object="${person}" method="post">
 
         <input type="hidden" th:field="*{id}"/>
@@ -18,11 +22,11 @@
 
         <div class="row">
             <div class="mb-3">
-                <div> <label for="username"> Nazwa użytkownika </label> </div>
+                <div> <label for="username" th:text="#{form.user.username}"> Nazwa użytkownika </label> </div>
                 <div>
                     <input id="username" type="text"
                            th:field="*{username}"
-                           placeholder="Username"
+                           th:placeholder="#{form.user.username}"
                            th:class=" 'form-control ' +${#fields.hasErrors('username') ? 'is-invalid' : ''}"/>
                         <small th:if="${#fields.hasErrors('username')}"
                                th:errors="*{username}"
@@ -30,11 +34,11 @@
                         </small>
                 </div>
 
-                <div> <label for="userRealName"> Imię i nazwisko </label> </div>
+                <div> <label for="userRealName" th:text="#{form.user.realname}"> Imię i nazwisko </label> </div>
                 <div>
                     <input id="userRealName" type="text"
                            th:field="*{userRealName}"
-                           placeholder="userRealName"
+                           th:placeholder="#{form.user.realname}"
                            th:class="'form-control ' +${#fields.hasErrors('userRealName') ? 'is-invalid' : ''}" />
                     <small th:if="${#fields.hasErrors('userRealName')}"
                            th:errors="*{userRealName}"
@@ -43,12 +47,12 @@
                 </div>
 
 
-                <div> <label for="password"> hasło </label> </div>
+                <div> <label for="password" th:text="#{form.user.password}"> hasło </label> </div>
                 <div>
                     <input id="password"
                            type="password"
                            th:field="*{password}"
-                           placeholder="hasło"
+                           th:placeholder="#{form.user.password}"
                            th:class="'form-control ' +${#fields.hasErrors('password') ? 'is-invalid' : ''}" />
                     <small th:if="${#fields.hasErrors('password')}"
                            th:errors="*{password}"
@@ -56,12 +60,12 @@
                     </small>
                 </div>
 
-                <div> <label for="repeatedPassword"> powtórzone hasło </label> </div>
+                <div> <label for="repeatedPassword" th:text="#{form.user.repeatedpassword}"> powtórzone hasło </label> </div>
                 <div>
                     <input id="repeatedPassword"
                            type="password"
                            th:field="*{repeatedPassword}"
-                           placeholder="hasło powtorzone"
+                           th:placeholder="#{form.user.repeatedpassword}"
                            th:class="'form-control ' +${#fields.hasErrors('repeatedPassword') ? 'is-invalid' : ''}" />
                     <small th:if="${#fields.hasErrors('repeatedPassword')}"
                            th:errors="*{repeatedPassword}"
@@ -70,7 +74,7 @@
                 </div>
 
 
-                <div> <label for="email"> email </label> </div>
+                <div> <label for="email">email</label> </div>
                 <div>
                     <input id="email" type="text"
                            th:field="*{email}"
@@ -102,7 +106,7 @@
         </div>
 
         <div>
-        <button type="submit" class="btn btn-primary" th:text="Zapisz"></button>
+        <button type="submit" class="btn btn-primary" th:text="#{form.user.save}"></button>
 
         <a th:href="@{'/people/delete/' + ${person.id}}"
            th:if="${person.id} and ${person.enabled} and ${person.username}!='admin'"

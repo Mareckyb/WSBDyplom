@@ -23,6 +23,7 @@ public class Issue {
     Long id;
 
     @Column(nullable = false)
+            @Size(min=1, max=100)
     String title;
 
     @Column(nullable = false)
@@ -34,7 +35,7 @@ public class Issue {
     TypeOfIssue typeOfIssue = TypeOfIssue.TASK;
 
     @Column(nullable = false)
-    @Size(max=500)
+    @Size(min=1, max=500)
     String description;
 
     @ManyToOne

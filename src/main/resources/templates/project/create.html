@@ -8,18 +8,21 @@
 <div layout:fragment="main-content">
 
     <div class="container">
+        <H1 th:if="${id}" th:text="#{form.project.old}" ></H1>
+        <H1 th:unless="${id}" th:text="#{form.project.new}" ></H1>
+        <br>
     <form th:action= "@{/project/save}" th:object="${project}" method="post">
 
         <input type="hidden" th:field="*{id}"/>
 
         <div class="row">
             <div>
-                <div class="col-md-6">
+                <div class="col-md-auto mb-3">
                 <div> <label for="projectname" th:text="#{form.project.name}"> Nazwa </label> </div>
                 <div>
                     <input id="projectname" type="text"
                            th:field="*{projectname}"
-                           placeholder="Nazwa projektu"
+                           th:placeholder="#{form.project.name}"
                            th:class=" 'form-control ' +${#fields.hasErrors('projectname') ? 'is-invalid' : ''}"/>
                     <small th:if="${#fields.hasErrors('projectname')}"
                            th:errors="*{projectname}"
@@ -28,12 +31,12 @@
                 </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-auto mb-3">
                 <div> <label for="description" th:text="#{form.project.description}"> Opis projektu </label> </div>
                 <div>
                     <textarea id="description" rows="3" maxlength="500"
                            th:field="*{description}"
-                           placeholder="Opis projektu"
+                           th:placeholder="#{form.project.description}"
                               th:class=" 'form-control ' +${#fields.hasErrors('description') ? 'is-invalid' : ''}"></textarea>
                     <small th:if="${#fields.hasErrors('description')}"
                            th:errors="*{description}"
