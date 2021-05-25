@@ -6,11 +6,66 @@
 <body>
 
 <div layout:fragment="main-content">
-  <section class="container">
 
+
+  <section class="container">
     <i class="fs-4 fst-normal bi-stickies"  th:text="#{menu.issues}"></i>
+
+    <form th:action="@{/issue}" th:object="${filter}"
+          class="form-inline">
+
+      <select th:field="*{project}"
+              class="form-control"
+              onchange="this.form.submit()">
+        <option th:value="${null}" th:text="#{filter.project.placeholder}">
+        </option>
+        <option th:each="project : ${projects}"
+                th:value="${project.id}"
+                th:text="${project.projectname}"></option>
+      </select>
+
+      <select th:field="*{assignee}"
+              class="form-control"
+              onchange="this.form.submit()">
+        <option th:value="${null}" th:text="#{filter.assignee.placeholder}"></option>
+        <option th:each="person : ${people}"
+                th:value="${person.id}"
+                th:text="${person.username}"></option>
+      </select>
+
+      <select th:field="*{state}"
+              class="form-control"
+              onchange="this.form.submit()">
+        <option th:value="${null}" th:text="#{filter.state.placeholder}"></option>
+        <option th:each="state : ${states}"
+                th:value="${state}"
+                th:text="${#messages.msg('stateName.' + state)}"></option>
+      </select>
+
+      <select th:field="*{typeOfIssue}"
+              class="form-control"
+              onchange="this.form.submit()">
+        <option th:value="${null}" th:text="#{filter.typeofissue.placeholder}"></option>
+        <option th:each="typeOfIssue : ${typeOfIssues}"
+                th:value="${typeOfIssue}"
+                th:text="${#messages.msg('typeOfIssue.' + typeOfIssue)}"></option>
+      </select>
+
+
+      <input th:field="*{title}"
+             class="form-control"
+             th:placeholder="#{filter.title.placeholder}"/>
+
+      <input th:field="*{globalSearch}"
+             class="form-control"
+             th:placeholder="#{filter.globalSearch.placeholder}"/>
+
+      <button class="btn btn-success btn-sm" type="submit" th:text="#{common.search}"></button>
+      <a th:href="@{/issue}" th:text="#{common.clear}" class="btn btn-info btn-sm"></a>
+    </form>
+
     <table class="table table-striped">
-      <thead class="black white-text">
+      <thead>
       <tr>
         <th th:text="#{list.issues.id}">
           Id
@@ -42,8 +97,8 @@
       <td th:text="${issue.project.projectname}">nazwa projektu</td>
       <td th:text="${issue.title}">tytuł zadania</td>
       <td th:if="${issue.assignee != null}" th:text="${issue.assignee.username}"> nazwa usera </td>
-      <td th:text="${issue.state}">Status</td>
-      <td th:text="${issue.typeOfIssue}">Typ zadania</td>
+      <td th:text="#{'stateName.'+${issue.state}}">Status</td>
+      <td th:text="#{'typeOfIssue.'+${issue.typeOfIssue}}">Typ zadania</td>
       <td>
         <a th:href="@{'/issue/edit/' + ${issue.id}}"
            th:text="Edytuj"

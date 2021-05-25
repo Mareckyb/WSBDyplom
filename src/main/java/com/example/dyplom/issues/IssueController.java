@@ -1,6 +1,8 @@
 package com.example.dyplom.issues;
 
+import com.example.dyplom.enums.StateName;
 import com.example.dyplom.enums.StateRepository;
+import com.example.dyplom.enums.TypeOfIssue;
 import com.example.dyplom.enums.TypeOfIssueRepository;
 import com.example.dyplom.person.PersonRepository;
 import com.example.dyplom.projects.Project;
@@ -34,11 +36,19 @@ public class IssueController {
     }
 
     @GetMapping
-    ModelAndView index() {
+    ModelAndView index(@ModelAttribute IssueFilter issueFilter) {
         ModelAndView modelAndView = new ModelAndView("issue/index");
-        modelAndView.addObject("issues", issueRepository.findAll());
+        modelAndView.addObject("issues", issueRepository.findAll(issueFilter.buildQuery()));
+        modelAndView.addObject("projects", projectRepository.findAll());
+        modelAndView.addObject("people", personRepository.findAll());
+        modelAndView.addObject("states", StateName.values());
+        modelAndView.addObject("typeOfIssues", TypeOfIssue.values());
+
+        modelAndView.addObject("filter", issueFilter);
+
         return modelAndView;
     }
+
 
     @GetMapping("/create")
     @Secured("ROLE_MANAGE_ISSUE")
@@ -56,9 +66,9 @@ public class IssueController {
     @Secured("ROLE_MANAGE_ISSUE")
     ModelAndView edit(@PathVariable Long id) {
         Issue issue = issueRepository.findById(id).orElse(null);
-        if (issue == null) {
-            return index();
-        }
+        //if (issue == null) {
+        //    return index();
+        //}
         ModelAndView modelAndView = new ModelAndView("issue/create");
         modelAndView.addObject("state", stateRepository.findAll());
         modelAndView.addObject("type", typeOfIssueRepository.findAll());
@@ -93,9 +103,9 @@ public class IssueController {
     ModelAndView deleteIssue (@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView();
         Issue issue = issueRepository.findById(id).orElse(null);
-        if (issue == null) {
-            return index();
-        }
+       // if (issue == null) {
+       //     return index();
+       // }
         issueRepository.delete(issue);
         modelAndView.setViewName("redirect:/issue/");
         return modelAndView;
