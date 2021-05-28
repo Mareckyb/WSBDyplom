@@ -11,7 +11,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("isAdmin", true);
-        return "index";
+        return "redirect:/issue";
     }
 
 
