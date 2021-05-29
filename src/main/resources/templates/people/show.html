@@ -65,36 +65,10 @@
 
         </div>
 
-        <div class="mb-3">
-          Uprawnienia:
 
-          <p th:each="authority : ${authorities}">
-            <input type="checkbox" name="authorities"
-                   th:value="${authority.id}"
-                   th:field="*{authorities}"/>
-
-            <label th:text="#{${'authority.' + authority.name}}"
-                   th:for="${#ids.prev('authorities')}"></label>
-          </p>
-
-        </div>
-
-      </div>
-
-      <div>
         <button type="submit" class="btn btn-primary" th:text="#{form.user.save}"></button>
 
-        <a th:href="@{'/people/delete/' + ${personForm.id}}"
-           th:if="${personForm.id} and ${personForm.username}!='admin'"
-           class="btn btn-danger" th:text="#{form.user.delete}">
-          Usuń
-        </a>
 
-        <a th:href="@{'/people/delete/' + ${person.id}}"
-           th:if="${person.id} and ${person.enabled==false} and ${person.username}!='admin'"
-           class="btn btn-danger" th:text="#{form.user.undelete}">
-          Przywróć
-        </a>
 
         <a th:href="@{/people/}"
            class="btn btn-info" th:text="#{form.user.cancel}">
