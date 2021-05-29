@@ -51,9 +51,9 @@ public class PersonController {
         if (person == null) {
             return index();
         }
-        ModelAndView modelAndView = new ModelAndView("people/create");
+        ModelAndView modelAndView = new ModelAndView("people/show");
         modelAndView.addObject("authorities", authorityRepository.findAll());
-        modelAndView.addObject("person", person);
+        modelAndView.addObject("personForm",new PersonForm(person));
         return modelAndView;
     }
 

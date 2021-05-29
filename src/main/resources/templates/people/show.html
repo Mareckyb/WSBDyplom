@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<body>
+
+<div layout:fragment="main-content">
+  <div class="container">
+    <H1 th:if="${id}" th:text="#{form.user.old}" ></H1>
+    <H1 th:unless="${id}" th:text="#{form.user.new}" ></H1>
+
+
+    <form th:action= "@{/people/save}" th:object="${personForm}" method="post">
+
+      <input type="hidden" th:field="*{id}"/>
+
+
+      <div th:if="${param.error}" class="alert alert-danger">
+        <span th:text="#{form.user.error}"></span>
+      </div>
+
+      <div class="row">
+        <div class="mb-3">
+          <div> <label for="username" th:text="#{form.user.username}"> Nazwa użytkownika </label> </div>
+          <div>
+            <input id="username" type="text"
+                   th:field="*{username}"
+                   th:placeholder="#{form.user.username}"
+                   th:class=" 'form-control ' +${#fields.hasErrors('username') ? 'is-invalid' : ''}"/>
+            <small th:if="${#fields.hasErrors('username')}"
+                   th:errors="*{username}"
+                   class = "text-danger">
+            </small>
+          </div>
+
+          <div> <label for="userRealName" th:text="#{form.user.realname}"> Imię i nazwisko </label> </div>
+          <div>
+            <input id="userRealName" type="text"
+                   th:field="*{userRealName}"
+                   th:placeholder="#{form.user.realname}"
+                   th:class="'form-control ' +${#fields.hasErrors('userRealName') ? 'is-invalid' : ''}" />
+            <small th:if="${#fields.hasErrors('userRealName')}"
+                   th:errors="*{userRealName}"
+                   class = "text-danger">
+            </small>
+          </div>
+
+
+
+
+
+          <div> <label for="email">email</label> </div>
+          <div>
+            <input id="email" type="text"
+                   th:field="*{email}"
+                   placeholder="email"
+                   th:class="'form-control ' +${#fields.hasErrors('email') ? 'is-invalid' : ''}" />
+            <small th:if="${#fields.hasErrors('email')}"
+                   th:errors="*{email}"
+                   class = "text-danger">
+            </small>
+          </div>
+
+
+        </div>
+
+        <div class="mb-3">
+          Uprawnienia:
+
+          <p th:each="authority : ${authorities}">
+            <input type="checkbox" name="authorities"
+                   th:value="${authority.id}"
+                   th:field="*{authorities}"/>
+
+            <label th:text="#{${'authority.' + authority.name}}"
+                   th:for="${#ids.prev('authorities')}"></label>
+          </p>
+
+        </div>
+
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-primary" th:text="#{form.user.save}"></button>
+
+        <a th:href="@{'/people/delete/' + ${personForm.id}}"
+           th:if="${personForm.id} and ${personForm.username}!='admin'"
+           class="btn btn-danger" th:text="#{form.user.delete}">
+          Usuń
+        </a>
+
+        <a th:href="@{'/people/delete/' + ${person.id}}"
+           th:if="${person.id} and ${person.enabled==false} and ${person.username}!='admin'"
+           class="btn btn-danger" th:text="#{form.user.undelete}">
+          Przywróć
+        </a>
+
+        <a th:href="@{/people/}"
+           class="btn btn-info" th:text="#{form.user.cancel}">
+          Anuluj
+        </a>
+
+
+      </div>
+    </form>
+
+  </div>
+</div>
+
+</body>
+</html>

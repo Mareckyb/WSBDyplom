@@ -43,6 +43,16 @@ public class PersonService {
         personRepository.save(person);
     }
 
+    public void savePerson(PersonForm personForm){
+        Person person = personRepository.findById(personForm.id).orElse(null);
+        person.username=personForm.username;
+        person.userRealName= personForm.userRealName;
+        person.email= personForm.email;
+
+        personRepository.save(person);
+    }
+
+
     List<Person> findAllUsers()
     {  return personRepository.findAll();    }
 
