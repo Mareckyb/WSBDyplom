@@ -11,7 +11,7 @@
     <H1 th:unless="${id}" th:text="#{form.user.new}" ></H1>
 
 
-    <form th:action= "@{/people/save}" th:object="${personForm}" method="post">
+    <form th:action= "@{/people/saveedited}" th:object="${personForm}" method="post">
 
       <input type="hidden" th:field="*{id}"/>
 

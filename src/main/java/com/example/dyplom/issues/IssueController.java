@@ -4,8 +4,9 @@ import com.example.dyplom.enums.StateName;
 import com.example.dyplom.enums.StateRepository;
 import com.example.dyplom.enums.TypeOfIssue;
 import com.example.dyplom.enums.TypeOfIssueRepository;
+import com.example.dyplom.mail.Mail;
+import com.example.dyplom.mail.MailService;
 import com.example.dyplom.person.PersonRepository;
-import com.example.dyplom.projects.Project;
 import com.example.dyplom.projects.ProjectRepository;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/issue")
@@ -25,14 +25,16 @@ public class IssueController {
     final StateRepository stateRepository;
     final TypeOfIssueRepository typeOfIssueRepository;
     final ProjectRepository projectRepository;
+    private final MailService mailService;
 
 
-    public IssueController(IssueRepository issueRepository, PersonRepository personRepository, StateRepository stateRepository, TypeOfIssueRepository typeOfIssueRepository, ProjectRepository projectRepository) {
+    public IssueController(IssueRepository issueRepository, PersonRepository personRepository, StateRepository stateRepository, TypeOfIssueRepository typeOfIssueRepository, ProjectRepository projectRepository, MailService mailService) {
         this.issueRepository = issueRepository;
         this.personRepository = personRepository;
         this.stateRepository = stateRepository;
         this.typeOfIssueRepository = typeOfIssueRepository;
         this.projectRepository = projectRepository;
+        this.mailService = mailService;
     }
 
     @GetMapping
@@ -59,6 +61,8 @@ public class IssueController {
         modelAndView.addObject("persons", personRepository.findAll());
         modelAndView.addObject("projects", projectRepository.findAll());
         modelAndView.addObject("issue", new Issue());
+
+
         return modelAndView;
     }
 
@@ -94,6 +98,13 @@ public class IssueController {
             return modelAndView;
         }
         issueRepository.save(issue);
+
+        if (issue.assignee.getEmail()!=null)
+        {
+            Mail mail = new Mail(issue.assignee.getEmail(), issue.getTitle(), issue.getDescription());
+            mailService.send(mail);
+        }
+
         modelAndView.setViewName("redirect:/issue/");
         return modelAndView;
     }
@@ -103,10 +114,11 @@ public class IssueController {
     ModelAndView deleteIssue (@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView();
         Issue issue = issueRepository.findById(id).orElse(null);
-       // if (issue == null) {
-       //     return index();
-       // }
+
+       if (issue != null) {
         issueRepository.delete(issue);
+       }
+
         modelAndView.setViewName("redirect:/issue/");
         return modelAndView;
     }

@@ -17,6 +17,7 @@ public class ProjectController {
 
     final ProjectRepository projectRepository;
     final IssueRepository issueRepository;
+    private ProjectService projectService;
 
     public ProjectController(ProjectRepository projectRepository, IssueRepository issueRepository) { this.projectRepository = projectRepository;
         this.issueRepository = issueRepository;

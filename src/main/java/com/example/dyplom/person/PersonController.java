@@ -51,9 +51,13 @@ public class PersonController {
         if (person == null) {
             return index();
         }
+
         ModelAndView modelAndView = new ModelAndView("people/show");
         modelAndView.addObject("authorities", authorityRepository.findAll());
         modelAndView.addObject("personForm",new PersonForm(person));
+
+        personService.savePerson(person);
+        modelAndView.setViewName("redirect:/people/");
         return modelAndView;
     }
 
@@ -76,6 +80,25 @@ public class PersonController {
 
         return modelAndView;
     }
+
+    @PostMapping(value = "/saveedited")
+    @Secured("ROLE_CREATE_USER")
+    ModelAndView saveEditedUser(@Valid @ModelAttribute PersonForm personForm, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("people/create");
+           // modelAndView.addObject("authorities", authorityRepository.findAll());
+            modelAndView.addObject("personForm", personForm);
+            return modelAndView;
+        }
+
+        personService.savePerson(personForm);
+        modelAndView.setViewName("redirect:/people/");
+
+        return modelAndView;
+    }
+
 
     @GetMapping("delete/{id}")
     @Secured ("ROLE_DELETE_USER")
