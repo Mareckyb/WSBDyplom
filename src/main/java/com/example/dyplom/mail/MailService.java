@@ -25,6 +25,7 @@ public class MailService {
             mimeMessageHelper.setText(mail.content);
 
             javaMailSender.send(mimeMessage);
+            System.out.println("Wysłano maila do: "+ mail.recipient);
 
         } catch (Exception e) {
             System.out.println("Wystąpił błąd przy wysyłaniu maila " + e);
