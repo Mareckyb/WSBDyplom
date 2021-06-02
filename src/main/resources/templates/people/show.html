@@ -7,36 +7,28 @@
 
 <div layout:fragment="main-content">
   <div class="container">
-    <H1  th:text="#{form.user.old}"></H1>
+
 
     <form th:action= "@{/people/saveedited}" th:object="${personForm}" method="post">
 
+      <H1  th:text="#{form.user.old} + ' ' + ${personForm.username}"></H1>
+
+
       <input type="hidden" th:field="*{id}"/>
+      <input type="hidden" th:field="*{username}"/>
 
       <div class="row">
         <div class="mb-3">
-          <div> <label for="username" th:text="#{form.user.username}"> Nazwa użytkownika </label> </div>
-          <div>
-            <input id="username" type="text"
-                   th:field="*{username}"
-                   th:placeholder="#{form.user.username}"
-                   th:class=" 'form-control ' +${#fields.hasErrors('username') ? 'is-invalid' : ''}"/>
-            <small th:if="${#fields.hasErrors('username')}"
-                   th:errors="*{username}"
-                   class = "text-danger">
-            </small>
-          </div>
+
 
           <div> <label for="userRealName" th:text="#{form.user.realname}"> Imię i nazwisko </label> </div>
           <div>
             <input id="userRealName" type="text"
                    th:field="*{userRealName}"
                    th:placeholder="#{form.user.realname}"
-                   th:class="'form-control ' +${#fields.hasErrors('userRealName') ? 'is-invalid' : ''}" />
-            <small th:if="${#fields.hasErrors('userRealName')}"
-                   th:errors="*{userRealName}"
-                   class = "text-danger">
-            </small>
+                   th:class="form-control"
+                   required/>
+            <div class="invalid-feedback" th:text="#{NotEmpty.person.userRealName}"></div>
           </div>
 
 

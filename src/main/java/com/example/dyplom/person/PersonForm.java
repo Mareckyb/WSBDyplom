@@ -15,13 +15,13 @@ import java.util.Set;
 
 public class PersonForm {
 
-    @NotBlank
+
      Long id;
 
-    @NotBlank
+
     String username;
 
-    @NotBlank
+
     String userRealName;
 
     String email;

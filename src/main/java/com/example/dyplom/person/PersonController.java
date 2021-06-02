@@ -86,7 +86,7 @@ public class PersonController {
 
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("people/show");
-            modelAndView.addObject("authorities", authorityRepository.findAll());
+            //modelAndView.addObject("authorities", authorityRepository.findAll());
             modelAndView.addObject("personForm", personForm);
             return modelAndView;
         }
