@@ -9,7 +9,7 @@
   <div class="container">
 
 
-    <form th:action= "@{/people/saveedited}" th:object="${personForm}" method="post">
+    <form th:action= "@{/people/saveCurrentUser}" th:object="${personForm}" method="post">
 
       <H1  th:text="#{form.user.old} + ' ' + ${personForm.username}"></H1>
 
@@ -46,28 +46,28 @@
 
         </div>
 
-        <div class="mb-3">
-          Uprawnienia:
+      </div>
 
-          <p th:each="authority : ${authorities}">
-            <input type="checkbox" name="authorities"
-                   th:value="${authority.id}"
-                   th:field="*{authorities}"/>
+      <div class="mb-3" hidden>
+        Uprawnienia:
 
-            <label th:text="#{${'authority.' + authority.name}}"
-                   th:for="${#ids.prev('authorities')}"></label>
-          </p>
+        <p th:each="authority : ${authorities}">
+          <input type="checkbox" name="authorities"
+                 th:value="${authority.id}"
+                 th:field="*{authorities}" hidden>
 
-        </div>
-
+          <label th:text="#{${'authority.' + authority.name}}"
+                 th:for="${#ids.prev('authorities')}" hidden></label>
+        </p>
 
       </div>
 
+
+
+
       <div>
+
         <button type="submit" class="btn btn-primary" th:text="#{form.user.save}"></button>
-
-
-
 
         <a th:href="@{/people/}"
            class="btn btn-info" th:text="#{form.user.cancel}">

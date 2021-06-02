@@ -2,8 +2,10 @@ package com.example.dyplom.person;
 
 import com.example.dyplom.authority.Authority;
 import com.example.dyplom.authority.AuthorityRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -48,8 +50,46 @@ public class PersonService {
         person.username=personForm.username;
         person.userRealName= personForm.userRealName;
         person.email= personForm.email;
+        person.setAuthorities(personForm.getAuthorities());
 
         personRepository.save(person);
+        getLoggedUserName();
+        getLoggedUserId(getLoggedUserName());
+
+    }
+
+    public void saveCurrentUser(PersonForm personForm){
+        Person person = personRepository.findById(personForm.id).orElse(null);
+        //person.username=personForm.username;
+        person.userRealName= personForm.userRealName;
+        person.email= personForm.email;
+        //person.setAuthorities(personForm.getAuthorities());
+
+        personRepository.save(person);
+
+    }
+
+    void changePassword(Person person) {
+        String hashedPassword = bCryptPasswordEncoder.encode(person.password);
+        person.setPassword(hashedPassword);
+
+        personRepository.save(person);
+    }
+
+    String getLoggedUserName()
+    {
+        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        System.out.println("Zalogowany user: "+loggedUser.getUsername());
+        return loggedUser.getUsername();
+    }
+
+    Long getLoggedUserId(String username){
+        Person person = new Person();
+        person = personRepository.findByUsername(username);
+
+        System.out.println("Id zalogowanego użytkownika: "+person.getId());
+        return person.getId();
     }
 
 

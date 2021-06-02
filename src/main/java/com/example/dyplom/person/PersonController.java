@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -79,6 +80,7 @@ public class PersonController {
         return modelAndView;
     }
 
+
     @PostMapping(value = "/saveedited")
     @Secured("ROLE_CREATE_USER")
     ModelAndView saveEditedUser(@Valid @ModelAttribute PersonForm personForm, BindingResult bindingResult) {
@@ -88,6 +90,7 @@ public class PersonController {
             modelAndView.setViewName("people/show");
             //modelAndView.addObject("authorities", authorityRepository.findAll());
             modelAndView.addObject("personForm", personForm);
+            modelAndView.addObject("authorities", personForm.getAuthorities());
             return modelAndView;
         }
 
@@ -96,6 +99,26 @@ public class PersonController {
 
         return modelAndView;
     }
+
+    @PostMapping(value = "/saveCurrentUser")
+    ModelAndView saveCurrentUser(@Valid @ModelAttribute PersonForm personForm, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("people/showlite");
+            //modelAndView.addObject("authorities", authorityRepository.findAll());
+            modelAndView.addObject("personForm", personForm);
+            //modelAndView.addObject("authorities", personForm.getAuthorities());
+
+            return modelAndView;
+        }
+
+        personService.saveCurrentUser(personForm);
+        modelAndView.setViewName("redirect:/issue/");
+
+        return modelAndView;
+    }
+
 
 
     @GetMapping("delete/{id}")
@@ -116,6 +139,52 @@ public class PersonController {
 
         return modelAndView;
     }
+
+    @GetMapping("/changepass/{id}")
+        ModelAndView changePassword(@PathVariable Long id) {
+        Person person = personRepository.findById(id).orElse(null);
+        if (person == null) {
+            return index();
+        }
+        ModelAndView modelAndView = new ModelAndView("people/changepass");
+        //modelAndView.addObject("authorities", authorityRepository.findAll());
+        modelAndView.addObject("person",person);
+
+
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/changepass")
+    ModelAndView changepass(@Valid @ModelAttribute Person person, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("people/changepass");
+            //modelAndView.addObject("authorities", authorityRepository.findAll());
+            modelAndView.addObject("person", person);
+            return modelAndView;
+        }
+        personService.changePassword(person);
+        modelAndView.setViewName("redirect:/people/");
+
+        return modelAndView;
+    }
+
+    @GetMapping("/editlogged/")
+    ModelAndView editLogged() {
+        Long id = personService.getLoggedUserId(personService.getLoggedUserName());
+        Person person = personRepository.findById(id).orElse(null);
+        if (person == null) {
+            return index();
+        }
+        PersonForm personForm = new PersonForm(person);
+        ModelAndView modelAndView = new ModelAndView("people/showlite");
+        //modelAndView.addObject("authorities", authorityRepository.findAll());
+        modelAndView.addObject("personForm",personForm);
+
+        return modelAndView;
+    }
+
 
 
 }

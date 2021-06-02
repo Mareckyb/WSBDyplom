@@ -29,5 +29,6 @@ public class simpleTask {
         //System.out.println("Ilość statusów zdarzeń: " + enumService.getStateNameSize());
         //System.out.println("Ilość typów zdarzeń: "+ enumService.getTypeOfIssueSize());
 
+
     }
 }

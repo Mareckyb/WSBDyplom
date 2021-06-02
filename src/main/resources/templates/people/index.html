@@ -44,6 +44,10 @@
                        th:text="#{list.users.edit}"
                        class="btn btn-secondary btn-sm m-0 py-1 px-2"></a>
 
+                    <a th:href="@{'/people/changepass/' + ${person.id}}"
+                       th:text="#{list.users.changepass}"
+                       class="btn btn-warning btn-sm m-0 py-1 px-2"></a>
+
                     <a th:href="@{'/people/delete/' + ${person.id}}"
                        th:if="${person.id} and ${person.enabled} and ${person.username}!='admin'"
                        class="btn btn-danger btn-sm m-0 py-1 px-2" th:text="#{form.user.delete}">

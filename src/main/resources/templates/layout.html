@@ -45,7 +45,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle"  id="navbarDropdown-Us" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page" href="#" th:text="#{menu.users}">Użytkownik</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown-Pr">
-                            <li><a class="dropdown-item" href="#" th:text="#{menu.userProfile}">Moje Konto</a></li>
+                            <li><a class="dropdown-item" href="/people/" th:text="#{menu.userProfile.changepass}">Zmień hasło</a></li>
+                            <li><a class="dropdown-item" href="/people/editlogged/" th:text="#{menu.userProfile.changedata}">Zmień dane</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/people/" th:text="#{menu.listUsers}">Lista Użytkowników</a></li>
                             <li><a class="dropdown-item" href="/people/create" th:text="#{menu.addUser}">Dodaj Użytkownika</a></li>
