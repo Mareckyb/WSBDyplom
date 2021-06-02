@@ -7,18 +7,11 @@
 
 <div layout:fragment="main-content">
   <div class="container">
-    <H1 th:if="${id}" th:text="#{form.user.old}" ></H1>
-    <H1 th:unless="${id}" th:text="#{form.user.new}" ></H1>
-
+    <H1  th:text="#{form.user.old}"></H1>
 
     <form th:action= "@{/people/saveedited}" th:object="${personForm}" method="post">
 
       <input type="hidden" th:field="*{id}"/>
-
-
-      <div th:if="${param.error}" class="alert alert-danger">
-        <span th:text="#{form.user.error}"></span>
-      </div>
 
       <div class="row">
         <div class="mb-3">
@@ -47,9 +40,6 @@
           </div>
 
 
-
-
-
           <div> <label for="email">email</label> </div>
           <div>
             <input id="email" type="text"
@@ -62,11 +52,14 @@
             </small>
           </div>
 
-
         </div>
 
 
+      </div>
+
+      <div>
         <button type="submit" class="btn btn-primary" th:text="#{form.user.save}"></button>
+
 
 
 

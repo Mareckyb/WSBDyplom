@@ -51,13 +51,11 @@ public class PersonController {
         if (person == null) {
             return index();
         }
-
+        PersonForm personForm = new PersonForm(person);
         ModelAndView modelAndView = new ModelAndView("people/show");
         modelAndView.addObject("authorities", authorityRepository.findAll());
-        modelAndView.addObject("personForm",new PersonForm(person));
+        modelAndView.addObject("personForm",personForm);
 
-        personService.savePerson(person);
-        modelAndView.setViewName("redirect:/people/");
         return modelAndView;
     }
 
@@ -87,8 +85,8 @@ public class PersonController {
         ModelAndView modelAndView = new ModelAndView();
 
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("people/create");
-           // modelAndView.addObject("authorities", authorityRepository.findAll());
+            modelAndView.setViewName("people/show");
+            modelAndView.addObject("authorities", authorityRepository.findAll());
             modelAndView.addObject("personForm", personForm);
             return modelAndView;
         }

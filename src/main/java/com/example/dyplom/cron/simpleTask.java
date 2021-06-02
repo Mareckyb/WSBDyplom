@@ -19,14 +19,15 @@ public class simpleTask {
     public void executeTask(){
 
 
-        Long countOfIssues = issueRepository.count();
-        System.out.println("Ilość zadań: "+ countOfIssues.toString());
+        //Long countOfIssues = issueRepository.count();
+        //System.out.println("Ilość zadań: "+ countOfIssues.toString());
 
-        if (enumService.chceckStateNameExists("TODO") == true) System.out.println("Status TODO istnieje");
-        else System.out.println("Status TODO nie istnieje");
+        //if (enumService.chceckStateNameExists("TODO") == true)
+        //System.out.println("Status TODO istnieje");
+        //else //System.out.println("Status TODO nie istnieje");
 
-        System.out.println("Ilość statusów zdarzeń: " + enumService.getStateNameSize());
-        System.out.println("Ilość typów zdarzeń: "+ enumService.getTypeOfIssueSize());
+        //System.out.println("Ilość statusów zdarzeń: " + enumService.getStateNameSize());
+        //System.out.println("Ilość typów zdarzeń: "+ enumService.getTypeOfIssueSize());
 
     }
 }
