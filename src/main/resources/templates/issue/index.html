@@ -7,8 +7,9 @@
 
 <div layout:fragment="main-content">
 
-  <i class="fs-4 fst-normal bi-stickies"  th:text="#{menu.issues}"></i>
+
   <section class="container">
+    <i class="fs-4 fst-normal bi-stickies"  th:text="#{menu.issues}"></i>
 
     <form th:action="@{/issue}" th:object="${filter}"
           class="row">
