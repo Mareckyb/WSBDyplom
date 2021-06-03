@@ -7,13 +7,13 @@
 
 <div layout:fragment="main-content">
     <div class="container">
-        <H1 th:if="${id}" th:text="#{form.user.old}" ></H1>
-        <H1 th:unless="${id}" th:text="#{form.user.new}" ></H1>
 
 
     <form th:action= "@{/people/save}" th:object="${person}" method="post">
 
         <input type="hidden" th:field="*{id}"/>
+        <H1 th:if="${id}" th:text="#{form.user.old}" ></H1>
+        <H1 th:unless="${id}" th:text="#{form.user.new}" ></H1>
 
 
         <div th:if="${param.error}" class="alert alert-danger">

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<body>
+
+<div layout:fragment="main-content">
+  <div class="container">
+
+      <form method="post" th:action="@{'/people/changePass/' + ${passwordForm.id}}" th:object="${passwordForm}">
+
+          <input th:field="*{id}" type="hidden"/>
+
+          <H1  th:text="#{form.user.changePass}"></H1>
+
+          <div class="row">
+              <div class="mb-3">
+                  <div><label  th:text="#{form.user.password}">Hasło</label></div>
+              <div>
+                  <input th:class="'form-control ' + ${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                         th:field="*{password}" type="password"/>
+                  <small class="text-danger" th:errors="*{password}"
+                         th:if="${#fields.hasErrors('password')}"></small>
+              </div>
+          </div>
+
+          <div class="row">
+              <div><label  th:text="#{form.user.repeatedpassword}">Powtórzone hasło</label>
+              </div>
+              <div>
+                  <input th:class="'form-control ' + ${#fields.hasErrors('repeatedPassword') ? 'is-invalid' : ''}"
+                         th:field="*{repeatedPassword}" type="password"/>
+                  <small class="text-danger" th:errors="*{repeatedPassword}"
+                         th:if="${#fields.hasErrors('repeatedPassword')}"></small>
+                  <small class="text-danger" th:errors="*{valid}"
+                         th:if="${#fields.hasErrors('valid')}"></small>
+              </div>
+          </div>
+          </div>
+
+          <div>
+              <br>
+              <button class="btn btn-primary" th:text="#{form.user.save}" type="submit"></button>
+              <a class="btn btn-info" th:href="@{/people/}" th:text="#{form.user.cancel}"></a>
+          </div>
+
+      </form>
+  </div>
+</div>
+
+</body>
+</html>

@@ -69,11 +69,11 @@ public class PersonService {
 
     }
 
-    void changePassword(Person person) {
-        String hashedPassword = bCryptPasswordEncoder.encode(person.password);
-        person.setPassword(hashedPassword);
-
+    public void updatePassword(PasswordForm passwordForm) {
+        Person person = personRepository.findById(passwordForm.id).orElse(null);
+        person.password = bCryptPasswordEncoder.encode(passwordForm.password);
         personRepository.save(person);
+
     }
 
     String getLoggedUserName()

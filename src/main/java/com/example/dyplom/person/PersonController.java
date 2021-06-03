@@ -140,33 +140,28 @@ public class PersonController {
         return modelAndView;
     }
 
-    @GetMapping("/changepass/{id}")
+    @GetMapping("/changePass/{id}")
+    @Secured("ROLE_CREATE_USER")
         ModelAndView changePassword(@PathVariable Long id) {
-        Person person = personRepository.findById(id).orElse(null);
-        if (person == null) {
-            return index();
-        }
-        ModelAndView modelAndView = new ModelAndView("people/changepass");
-        //modelAndView.addObject("authorities", authorityRepository.findAll());
-        modelAndView.addObject("person",person);
-
-
+        PasswordForm passwordForm = new PasswordForm();
+        passwordForm.setId(id);
+        ModelAndView modelAndView = new ModelAndView("people/changePass");
+        modelAndView.addObject("passwordForm",passwordForm);
         return modelAndView;
     }
 
-    @PostMapping(value = "/changepass")
-    ModelAndView changepass(@Valid @ModelAttribute Person person, BindingResult bindingResult) {
+
+    @PostMapping(value = "/changePass/{id}")
+    ModelAndView changePass(@Valid @ModelAttribute PasswordForm passwordForm,@PathVariable("id") Long id,  BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
 
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("people/changepass");
-            //modelAndView.addObject("authorities", authorityRepository.findAll());
-            modelAndView.addObject("person", person);
+            modelAndView.setViewName("people/changePass");
+            modelAndView.addObject("passwordForm", passwordForm);
             return modelAndView;
         }
-        personService.changePassword(person);
+        personService.updatePassword(passwordForm);
         modelAndView.setViewName("redirect:/people/");
-
         return modelAndView;
     }
 
@@ -179,11 +174,22 @@ public class PersonController {
         }
         PersonForm personForm = new PersonForm(person);
         ModelAndView modelAndView = new ModelAndView("people/showlite");
-        //modelAndView.addObject("authorities", authorityRepository.findAll());
         modelAndView.addObject("personForm",personForm);
 
         return modelAndView;
     }
+
+    @GetMapping("/changePasswordLogged")
+    ModelAndView changePasswordLogged() {
+        Long id = personService.getLoggedUserId(personService.getLoggedUserName());
+
+        PasswordForm passwordForm = new PasswordForm();
+        passwordForm.setId(id);
+        ModelAndView modelAndView = new ModelAndView("people/changePass");
+        modelAndView.addObject("passwordForm",passwordForm);
+        return modelAndView;
+    }
+
 
 
 
