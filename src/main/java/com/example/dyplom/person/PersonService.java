@@ -92,6 +92,10 @@ public class PersonService {
         return person.getId();
     }
 
+    Person getUserByUsername(String username){
+        return personRepository.findByUsername(username);
+    }
+
 
     List<Person> findAllUsers()
     {  return personRepository.findAll();    }

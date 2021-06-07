@@ -15,10 +15,23 @@
 
 
       <input type="hidden" th:field="*{id}"/>
-      <input type="hidden" th:field="*{username}"/>
 
       <div class="row">
         <div class="mb-3">
+
+
+          <div> <label for="username" th:text="#{form.user.username}"> Imię i nazwisko </label> </div>
+          <div>
+            <input id="username" type="text"
+                   th:field="*{username}"
+                   th:placeholder="#{form.user.username}"
+                   th:class="'form-control ' + ${#fields.hasErrors('username') ? 'is-invalid' : ''}"/>
+            <small class="text-danger" th:errors="*{username}"
+                   th:if="${#fields.hasErrors('username')}"></small>
+            <small class="text-danger" th:errors="*{valid}"
+                   th:if="${#fields.hasErrors('valid')}"></small>
+          </div>
+
 
 
           <div> <label for="userRealName" th:text="#{form.user.realname}"> Imię i nazwisko </label> </div>
@@ -26,9 +39,7 @@
             <input id="userRealName" type="text"
                    th:field="*{userRealName}"
                    th:placeholder="#{form.user.realname}"
-                   th:class="form-control"
-                   required/>
-            <div class="invalid-feedback" th:text="#{NotEmpty.person.userRealName}"></div>
+                   th:class="'form-control ' + ${#fields.hasErrors('userRealName') ? 'is-invalid' : ''}"/>
           </div>
 
 
