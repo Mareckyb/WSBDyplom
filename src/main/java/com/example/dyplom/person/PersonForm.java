@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
+import java.io.IOError;
 import java.util.Set;
 
 @Getter
@@ -17,7 +18,6 @@ import java.util.Set;
 
 public class PersonForm {
 
-    @Autowired
     private PersonRepository personRepository;
     private PersonService personService;
 
@@ -33,19 +33,26 @@ public class PersonForm {
     Set<Authority> authorities;
 
 
-    public PersonForm (Person person){
+    public PersonForm (Person person, PersonRepository personRepository){
 
         this.id = person.id;
         this.username = person.username;
         this.userRealName= person.userRealName;
         this.email= person.email;
         this.authorities=person.getAuthorities();
+        this.personRepository=personRepository;
     }
+
 
     @AssertTrue(message = "Login already exists")
     public boolean isValid() {
-       PersonRepository personRepository = this.personRepository;
-       Person findPerson = personRepository.findByUsername(this.username);
+        Person findPerson;
+        try {
+            findPerson = personRepository.findByUsername(this.username);
+        }
+        catch(NullPointerException e){
+            return true;
+        }
        if (findPerson.id == null || findPerson.id.equals(this.id)) return true;
        else return false;
     }

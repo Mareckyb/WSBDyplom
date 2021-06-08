@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -12,14 +13,17 @@ import javax.validation.constraints.AssertTrue;
 
 public class PasswordForm {
 
+
     Long id;
+    @NotBlank
     String password;
+    @NotBlank
     String repeatedPassword;
-    boolean isValid;
+    boolean isValidPass;
 
 
     @AssertTrue(message = "Passwords are not the same")
-    public boolean isValid() {
+    public boolean isValidPass() {
 
         if (password ==null || password.length()<3)
             return false;

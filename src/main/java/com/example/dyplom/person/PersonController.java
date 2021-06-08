@@ -52,7 +52,7 @@ public class PersonController {
         if (person == null) {
             return index();
         }
-        PersonForm personForm = new PersonForm(person);
+        PersonForm personForm = new PersonForm(person, personRepository);
         ModelAndView modelAndView = new ModelAndView("people/show");
         modelAndView.addObject("authorities", authorityRepository.findAll());
         modelAndView.addObject("personForm",personForm);
@@ -172,7 +172,7 @@ public class PersonController {
         if (person == null) {
             return index();
         }
-        PersonForm personForm = new PersonForm(person);
+        PersonForm personForm = new PersonForm(person, personRepository);
         ModelAndView modelAndView = new ModelAndView("people/showlite");
         modelAndView.addObject("personForm",personForm);
 

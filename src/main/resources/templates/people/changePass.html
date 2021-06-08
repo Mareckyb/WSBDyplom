@@ -33,8 +33,8 @@
                          th:field="*{repeatedPassword}" type="password"/>
                   <small class="text-danger" th:errors="*{repeatedPassword}"
                          th:if="${#fields.hasErrors('repeatedPassword')}"></small>
-                  <small class="text-danger" th:errors="*{valid}"
-                         th:if="${#fields.hasErrors('valid')}"></small>
+                  <small class="text-danger" th:errors="*{validPass}"
+                         th:if="${#fields.hasErrors('validPass')}"></small>
               </div>
           </div>
           </div>
