@@ -19,7 +19,7 @@ public class PasswordForm {
     String password;
     @NotBlank
     String repeatedPassword;
-    boolean isValidPass;
+    boolean ValidPass;
 
 
     @AssertTrue(message = "Passwords are not the same")

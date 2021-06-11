@@ -108,12 +108,13 @@ public class PersonController {
             modelAndView.setViewName("people/showlite");
             //modelAndView.addObject("authorities", authorityRepository.findAll());
             modelAndView.addObject("personForm", personForm);
-            //modelAndView.addObject("authorities", personForm.getAuthorities());
+            modelAndView.addObject("authorities", personForm.getAuthorities());
 
             return modelAndView;
         }
 
-        personService.saveCurrentUser(personForm);
+        //personService.saveCurrentUser(personForm);
+        personService.savePerson(personForm);
         modelAndView.setViewName("redirect:/issue/");
 
         return modelAndView;
@@ -151,8 +152,8 @@ public class PersonController {
     }
 
 
-    @PostMapping(value = "/changePass/{id}")
-    ModelAndView changePass(@Valid @ModelAttribute PasswordForm passwordForm,@PathVariable("id") Long id,  BindingResult bindingResult) {
+    @PostMapping(value = "/changePass/")
+    ModelAndView changePass(@Valid @ModelAttribute PasswordForm passwordForm,  BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
 
         if (bindingResult.hasErrors()) {
@@ -174,7 +175,10 @@ public class PersonController {
         }
         PersonForm personForm = new PersonForm(person, personRepository);
         ModelAndView modelAndView = new ModelAndView("people/showlite");
+
+        modelAndView.addObject("authorities", authorityRepository.findAll());
         modelAndView.addObject("personForm",personForm);
+
 
         return modelAndView;
     }

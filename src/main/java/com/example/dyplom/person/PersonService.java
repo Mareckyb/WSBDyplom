@@ -86,10 +86,15 @@ public class PersonService {
 
     Long getLoggedUserId(String username){
         Person person = new Person();
-        person = personRepository.findByUsername(username);
 
-        System.out.println("Id zalogowanego użytkownika: "+person.getId());
-        return person.getId();
+        try {
+            person = personRepository.findByUsername(username);
+            System.out.println("Id zalogowanego użytkownika: " + person.getId());
+            return person.getId();
+        }
+        catch (NullPointerException e) {
+            return null;
+        }
     }
 
     Person getUserByUsername(String username){

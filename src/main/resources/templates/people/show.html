@@ -40,6 +40,10 @@
                    th:field="*{userRealName}"
                    th:placeholder="#{form.user.realname}"
                    th:class="'form-control ' + ${#fields.hasErrors('userRealName') ? 'is-invalid' : ''}"/>
+            <small class="text-danger" th:errors="*{userRealName}"
+                   th:if="${#fields.hasErrors('userRealName')}"></small>
+            <small class="text-danger" th:errors="*{userRealNameValid}"
+                   th:if="${#fields.hasErrors('userRealNameValid')}"></small>
           </div>
 
 
@@ -76,10 +80,6 @@
 
       <div>
         <button type="submit" class="btn btn-primary" th:text="#{form.user.save}"></button>
-
-
-
-
         <a th:href="@{/people/}"
            class="btn btn-info" th:text="#{form.user.cancel}">
           Anuluj

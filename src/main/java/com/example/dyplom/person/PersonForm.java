@@ -4,12 +4,10 @@ import com.example.dyplom.authority.Authority;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotBlank;
-import java.io.IOError;
 import java.util.Set;
 
 @Getter
@@ -26,8 +24,8 @@ public class PersonForm {
     String userRealName;
     String email;
 
-    boolean isValid;
-    //boolean userRealNameValid;
+    boolean Valid;
+    boolean userRealNameValid;
 
 
     Set<Authority> authorities;
@@ -44,21 +42,23 @@ public class PersonForm {
     }
 
 
-    @AssertTrue(message = "Login already exists")
+    @AssertTrue(message = "Login already exists or login is empty")
     public boolean isValid() {
         Person findPerson;
         try {
             findPerson = personRepository.findByUsername(this.username);
         }
         catch(NullPointerException e){
+            if (this.username =="" || this.username == null) return false;
+            else
             return true;
         }
        if (findPerson.id == null || findPerson.id.equals(this.id)) return true;
        else return false;
     }
 
-    //@AssertTrue(message = "User Real Name is too short")
-    //public boolean isUserRealNameValid() {
-    //    return this.userRealName.length() >= 3;
-    //}
+    @AssertTrue(message = "User Real Name is too short")
+    public boolean isUserRealNameValid() {
+    return this.userRealName.length() >= 3;
+    }
 }
