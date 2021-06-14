@@ -9,13 +9,16 @@
 
 
   <section class="container">
+
     <i class="fs-4 fst-normal bi-stickies"  th:text="#{menu.issues}"></i>
+    <br>
+    <br>
+    <div th:text="#{filter.names}"></div>
+    <form th:action="@{/issue}" th:object="${filter}" class="row g-2">
 
-    <form th:action="@{/issue}" th:object="${filter}"
-          class="row">
-
+      <div class="col">
         <select th:field="*{project}"
-              class="form-control mb-2"
+              class="form-control"
               onchange="this.form.submit()">
         <option th:value="${null}" th:text="#{filter.project.placeholder}">
         </option>
@@ -23,43 +26,62 @@
                 th:value="${project.id}"
                 th:text="${project.projectname}"></option>
       </select>
+      </div>
 
-
+      <div class="col">
       <select th:field="*{assignee}"
-              class="form-control mb-2"
+              class="form-control"
               onchange="this.form.submit()">
         <option th:value="${null}" th:text="#{filter.assignee.placeholder}"></option>
         <option th:each="person : ${people}"
                 th:value="${person.id}"
                 th:text="${person.username}"></option>
       </select>
+      </div>
 
+      <div class="col">
       <select th:field="*{state}"
-              class="form-control mb-2"
+              class="form-control"
               onchange="this.form.submit()">
         <option th:value="${null}" th:text="#{filter.state.placeholder}"></option>
         <option th:each="state : ${states}"
                 th:value="${state}"
                 th:text="${#messages.msg('stateName.' + state)}"></option>
       </select>
+      </div>
 
+      <div class="col">
       <select th:field="*{typeOfIssue}"
-              class="form-control mb-2"
+              class="form-control"
               onchange="this.form.submit()">
         <option th:value="${null}" th:text="#{filter.typeofissue.placeholder}"></option>
         <option th:each="typeOfIssue : ${typeOfIssues}"
                 th:value="${typeOfIssue}"
                 th:text="${#messages.msg('typeOfIssue.' + typeOfIssue)}"></option>
       </select>
+      </div>
+
+      <div class="col-md-2">
       <input th:field="*{title}"
-             class="form-control mb-3"
+             class="form-control"
+             onchange="this.form.submit()"
              th:placeholder="#{filter.title.placeholder}"/>
+      </div>
+
+      <div class="col-md-3">
       <input th:field="*{globalSearch}"
-             class="form-control mb-3"
+             class="form-control"
+             onchange="this.form.submit()"
              th:placeholder="#{filter.globalSearch.placeholder}"/>
-      <button class="btn btn-success btn-sm" type="submit" th:text="#{common.search}"></button>
-      <a th:href="@{/issue}" th:text="#{common.clear}" class="btn btn-info btn-sm"></a>
+      </div>
+
+
+      <div class="col">
+      <a th:href="@{/issue}" th:text="#{common.clear}" class="btn btn-info"></a>
+      </div>
     </form>
+    <br>
+  </section>
 
 
 
@@ -119,7 +141,7 @@
          class="btn btn-primary"></a>
     </div>
     </div>
-  </section>
+
 </div>
 
 </body>

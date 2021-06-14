@@ -26,7 +26,7 @@
                         <div>
                             <input id="title" type="text"
                                    th:field="*{title}"
-                                   placeholder="Tytuł zgłoszenia"
+                                   th:placeholder="#{form.issue.name}"
                                    th:class=" 'form-control ' +${#fields.hasErrors('title') ? 'is-invalid' : ''}"/>
                             <small th:if="${#fields.hasErrors('title')}"
                                    th:errors="*{title}"
@@ -41,7 +41,7 @@
                         <div>
                     <textarea id="description" rows="10" maxlength="500"
                               th:field="*{description}"
-                              placeholder="Opis projektu"
+                              th:placeholder="#{form.issue.description}"
                               th:class=" 'form-control ' +${#fields.hasErrors('description') ? 'is-invalid' : ''}"></textarea>
                             <small th:if="${#fields.hasErrors('description')}"
                                    th:errors="*{description}"
