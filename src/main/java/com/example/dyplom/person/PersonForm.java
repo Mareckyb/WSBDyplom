@@ -17,7 +17,7 @@ import java.util.Set;
 public class PersonForm {
 
     private PersonRepository personRepository;
-    private PersonService personService;
+   // private PersonService personService;
 
     Long id;
     String username;
@@ -44,13 +44,12 @@ public class PersonForm {
 
     @AssertTrue(message = "Login already exists or login is empty")
     public boolean isValid() {
+        if (this.username == null) return false;
         Person findPerson;
         try {
             findPerson = personRepository.findByUsername(this.username);
         }
         catch(NullPointerException e){
-            if (this.username =="" || this.username == null) return false;
-            else
             return true;
         }
        if (findPerson.id == null || findPerson.id.equals(this.id)) return true;
