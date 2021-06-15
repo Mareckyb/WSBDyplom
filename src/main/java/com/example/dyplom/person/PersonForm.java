@@ -44,7 +44,8 @@ public class PersonForm {
 
     @AssertTrue(message = "Login already exists or login is empty")
     public boolean isValid() {
-        if (this.username == null) return false;
+        if (this.username == null || this.username =="" ) return false;
+
         Person findPerson;
         try {
             findPerson = personRepository.findByUsername(this.username);

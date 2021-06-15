@@ -28,7 +28,7 @@
                    th:class="'form-control ' + ${#fields.hasErrors('username') ? 'is-invalid' : ''}"/>
             <small class="text-danger" th:errors="*{username}"
                    th:if="${#fields.hasErrors('username')}"></small>
-            <small class="text-danger" th:errors="*{valid}"
+            <small class="text-danger" th:text="#{form.user.UsernameError}"
                    th:if="${#fields.hasErrors('valid')}"></small>
           </div>
 
@@ -42,7 +42,7 @@
                    th:class="'form-control ' + ${#fields.hasErrors('userRealName') ? 'is-invalid' : ''}"/>
             <small class="text-danger" th:errors="*{userRealName}"
                    th:if="${#fields.hasErrors('userRealName')}"></small>
-            <small class="text-danger" th:errors="*{userRealNameValid}"
+            <small class="text-danger" th:text="#{form.user.NameToShort}"
                    th:if="${#fields.hasErrors('userRealNameValid')}"></small>
           </div>
 
