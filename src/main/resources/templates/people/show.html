@@ -62,7 +62,7 @@
         </div>
 
         <div class="mb-3">
-          Uprawnienia:
+          <b th:text="#{form.user.authorisations}">Uprawnienia</b>
 
           <p th:each="authority : ${authorities}">
             <input type="checkbox" name="authorities"

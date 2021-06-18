@@ -123,11 +123,11 @@
       <td th:text="#{'typeOfIssue.'+${issue.typeOfIssue}}">Typ zadania</td>
       <td>
         <a th:href="@{'/issue/edit/' + ${issue.id}}"
-           th:text="Edytuj"
+           th:text="#{list.users.edit}"
            class="btn btn-secondary btn-sm m-0 py-1 px-2"></a>
         <a th:href="@{'/issue/delete/' + ${issue.id}}"
            th:if="${issue.id}"
-           class="btn btn-danger btn-sm m-0 py-1 px-2" th:text="#{form.user.delete}">
+           class="btn btn-danger btn-sm m-0 py-1 px-2" th:text="#{list.issues.delete}">
           Usuń
         </a>
       </td>
