@@ -5,6 +5,7 @@ import com.example.dyplom.authority.AuthorityRepository;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -85,6 +86,12 @@ public class PersonController {
     @Secured("ROLE_CREATE_USER")
     ModelAndView saveEditedUser(@Valid @ModelAttribute PersonForm personForm, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+        personForm.setPersonRepository(this.personRepository);
+
+        if(!personForm.isValid()) {
+            System.out.println("walidacja wskazała błąd");
+            bindingResult.addError(new FieldError("personForm", "username", "Login nie jest unikalny więc jest błędny"));
+        }
 
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("people/show");

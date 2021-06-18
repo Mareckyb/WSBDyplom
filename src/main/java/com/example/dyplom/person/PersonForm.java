@@ -49,12 +49,14 @@ public class PersonForm {
         Person findPerson;
         try {
             findPerson = personRepository.findByUsername(this.username);
+            if (findPerson.id == null || findPerson.id.equals(this.id)) return true;
+            else return false;
         }
         catch(NullPointerException e){
             return true;
         }
-       if (findPerson.id == null || findPerson.id.equals(this.id)) return true;
-       else return false;
+      // if (findPerson.id == null || findPerson.id.equals(this.id)) return true;
+      // else return false;
     }
 
     @AssertTrue(message = "User Real Name is too short")

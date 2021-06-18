@@ -26,7 +26,7 @@
                    th:field="*{username}"
                    th:placeholder="#{form.user.username}"
                    th:class="'form-control ' + ${#fields.hasErrors('username') ? 'is-invalid' : ''}"/>
-            <small class="text-danger" th:errors="*{username}"
+            <small class="text-danger" th:text="#{form.user.UsernameError}"
                    th:if="${#fields.hasErrors('username')}"></small>
             <small class="text-danger" th:text="#{form.user.UsernameError}"
                    th:if="${#fields.hasErrors('valid')}"></small>
